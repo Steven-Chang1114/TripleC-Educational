@@ -6,13 +6,8 @@
 
 ## Week 1:
 ### Introduction to Git, VS code, HTML, CSS
-### 1. Git
-
-[Quick tutorial (Video)](https://www.youtube.com/watch?v=USjZcfj8yxE)
-
-[Quick tutorial (Article)](#week-1)
-
-### 2. VS code
+### 1. [Git](Git.md)
+### 2. [VS code](vscode.md)
 ### 3. HTML
 ### 4. CSS
 
