@@ -7,6 +7,7 @@
 ### 2. [Repo](#repo)
 ### 3. [Code management](#code-management)
 ### 4. [Branches](#branches)
+### 5. [Others](#others)
 
 ## Intro
 
@@ -157,6 +158,8 @@ git merge <branch-name>
 ```
 So ```git checkout main``` is to go back to the default branch, and ```git merge <branch-name>``` is to merge the changes from ```<branch-name>``` branch to the ```main``` branch
 
+
+## Others
 Lastly, here are some other userful command for future references:
 To see all existing branch, (the * branch is the branch that you are currently on)
 ```
