@@ -82,21 +82,21 @@ They both are used as a reference for CSS in a style sheet. They can also be use
 
 To use the attribute, you can do
 ```
-    <p ATTRIBUTE_NAME=VALUE>
-        Hello
-    </p>
+<p ATTRIBUTE_NAME=VALUE>
+    Hello
+</p>
 ```
 for example
 ```
-    <p class="exampleclass">
-        Hello
-    </p>
+<p class="exampleclass">
+    Hello
+</p>
 ```
 or
 ```
-    <p id="exampleid">
-        Hello
-    </p>
+<p id="exampleid">
+    Hello
+</p>
 ```
 
 There are two main types of attributes:
@@ -104,6 +104,15 @@ There are two main types of attributes:
 - Element-specific attribute: As the name specified, for example ```src``` attribute in ```img``` tag
 
 [Here are](https://www.w3schools.com/html/html_attributes.asp) some commonly used attributes
+
+Lastly, to load CSS file into html file, do
+```
+<link rel="stylesheet" href="style.css">
+```
+Inside the ```head``` tag. Likewise, to load JS file into html file, do
+```
+<script src="index.js"></script>
+```
 
 [Tutorial (Optional)](https://www.youtube.com/watch?v=pQN-pnXPaVg)
 ### CSS
