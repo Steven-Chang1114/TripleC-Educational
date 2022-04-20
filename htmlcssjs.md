@@ -10,8 +10,16 @@
 1. [Intro](#intro)
 2. [Material](#material)
     * [HTML](#html-1)
+        * [Tags](#tags)
+        * [Attribute](#attribute)
     * [CSS](#css-1)
+        * [Styles and Attributes](#styles-and-attributes)
+        * [Layout](#layout)
+        * [Types of CSS](#types-of-css)
     * [JS](#js-1)
+        * [ES5 and ES6](#es5-and-es6)
+        * [Syntax](#syntax)
+        * [Asynchronous (Async) Programming](#asynchronous-(async)-programming)
 3. [Basic workflow](#work-flow)
 
 ## Intro
@@ -173,7 +181,7 @@ Note: you can also watch this [8 minutes video](https://www.youtube.com/watch?v=
 
 #### Layout
 
-There are different way of doing the layout in CSS, but for simplicity, I would highly recommend [Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) to do all the layout.
+There are different way of doing the layout in CSS, but for simplicity, I would highly recommend ***[Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)*** to do all the layout.
 
 In addition, it is very important to understand the concept of the ***Box Model***
 ![](https://media.gcflearnfree.org/content/5ef2084faaf0ac46dc9c10be_06_23_2020/box_model.png)
@@ -252,6 +260,141 @@ For most of the time, we will be using external CSS for cleaner code
 
 [Tutorial(Optional)](https://www.youtube.com/watch?v=1Rs2ND1ryYc)
 ### JS
+#### ES5 and ES6
+ES5 (ECMAScript 2009) is the javaScript version that is released in 2009, and ES6 (ECMAScript 2015) is released in 2015. Compared with ES5, ES6 has a lot of new features that's being added on to the javaScript which divides the "old JS" with "new JS". Nowadays we are very encouraged to use the ES6 syntax over ES5, so in the following sections I will introduced both ES5 and ES6 syntax in order to let you know the difference.
+
+In addition, even though ES5 is outdated, it is NOT deprecated. In other words, if you insist to code in ES5 style, it will still works, it's just not recommended.
+
+#### Syntax
+There are 8 different data types in JS
+| Data Types      | Description | Example   |
+| :---        |    :----:   |          ---: |
+| ```String```      | represents textual data       | ```'hello'```, ```"hello world!"``` etc   |
+| ```Number```   | an integer or a floating-point number        | ```3```, ```3.234```, ```3e-2``` etc.      |
+| ```BigInt``` (ES2020)     | an integer with arbitrary precision       | ```900719925124740999n``` , ```1n``` etc.  |
+| ```Boolean```   | Any of two values: true or false      | ```true``` and ```false```     |
+| ```undefined```     | a data type whose variable is not initialized       | ```let a;```  |
+| ```null```   | denotes a null value        | ```let a = null;```      |
+| ```Symbol``` (ES6)  | data type whose instances are unique and immutable       | ```let value = Symbol('hello'); ```  |
+| ```Object ```  | key-value pairs of collection of data        | ```let student = { }; ``` |
+
+##### Variable declaration
+There three ways declaring the variable:
+```
+var a = 1 //ES5
+let b = 2
+const c = 3
+```
+- ```var``` used to be the main way of declaring variables before 2015. ```var``` is function scoped when it is declared within a function.  This means that it is available and can be accessed only within that function.
+- ```let``` is now preferred for variable declaration. It is very similar with ```var``` except ```let``` is block scoped, which means if you use ```let``` declaration inside the ```if else``` statement, you cannot access this variable outside of this statement.
+- ```const``` is similar with ```let``` but it contains const value which means it is immutable. Same as ```let```, it is block scoped.
+
+For the variable declaration, there is a concept called [***hoisting***](https://www.w3schools.com/js/js_hoisting.asp), but it's optional content. You can learn it in your own time
+
+##### Object
+```Object``` is very similar as the ```dictionary``` in python. It is basically the key value pair and it is able to construct with values in different types such as
+```
+const obj = {
+    name: "Steven",
+    school: "UCSD", 
+    age: 21
+}
+```
+To access the object properties, you can do ```obj.name``` or ```obj["name"]``` to retrive ```"Steven"```
+##### Arrays
+```array``` in JS is very similar as the the ```list``` in python. It is declared as below:
+```
+const array_name = [item1, item2, ...];     
+```
+and you can access each item using ```array_name[index]```, and ```array_name.length``` for the array length.
+
+Array itself is actually type ```Object``` in JavaScript, which means it comes with many properties and methods described in the this [website](https://www.w3schools.com/jsref/jsref_obj_array.asp)
+
+##### Function
+
+There are two ways of defining functions:
+```
+//ES5
+function myFunction(p1, p2) {
+  return p1 * p2;   // The function returns the product of p1 and p2
+}
+
+//Equivalently in ES6
+const myFunction = (p1,p2) => {
+    return p1 * p2
+}
+```
+
+The function declaration in ES6 is also called ***arrow function***. The main difference between arrow function and normal ES5 function is ```this``` keyword. To fully understand ```this```, you can watch [this video](https://www.youtube.com/watch?v=Pi3QC_fVaD0) or read [this article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this). In shorts, arrow function doesn't inherit the ```this``` keyword but normal function does.
+
+##### Loop and if statement
+It's very similar with other C-like languages:
+if statement
+```
+if (condition) {
+  //  block of code to be executed if the condition is true
+} else {
+  //  block of code to be executed if the condition is false
+}
+```
+For loop
+```
+for (let i = 0; i < 5; i++) {
+    //console.log is basically the printing method in JavaScript
+    console.log(i);
+}
+```
+For-in loop
+```
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`);
+}
+
+// expected output:
+// "a: 1"
+// "b: 2"
+// "c: 3"
+```
+For-of loop
+```
+const array1 = ['a', 'b', 'c'];
+
+for (const element of array1) {
+  console.log(element);
+}
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+```
+While loop
+```
+while (condition) {
+  // code block to be executed
+}
+```
+
+#### Asynchronous (Async) Programming
+In easy words, asynchronous operation means the operation that does not take place in real-time (it will run in the background and return to realtime when it receives the result) whereas synchronous operation is always execute in order.
+Before we dive deep asynchronous programming, we first need to know JavaScript is a single-threaded language which means it has a synchronous nature. Therefore, in order to achieve the asynchronous functionality, we need to understand the JavaScript run time environment and the concept of ***Event loop*** and ***Callback queue*** which will be explained in [this video](https://www.youtube.com/watch?v=FVZ-A_Akros).
+![](https://miro.medium.com/max/1024/1*4lHHyfEhVB0LnQ3HlhSs8g.png)
+
+##### Promise
+
+##### Fetch
+
+##### Async Await
+
+
+#### DOM
+
+#### TypeScript
+
+#### Librarys
+
+##### Babel
 
 [Tutorial (JS) (Optional)](https://www.youtube.com/watch?v=PkZNo7MFNFg)
 
