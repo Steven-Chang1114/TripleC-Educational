@@ -34,7 +34,7 @@ Repositories (Repo for short) is an important concept when working with Git, it 
 
 ## Code management
 
- #### Get started
+### Get started
  
 As a little demo, first we make the folder
  ```
@@ -61,7 +61,7 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
  ```
  
- #### Staging
+ ### Staging
   Next, we will learn how to push the code from local repo back to the remote repo. To stage the file, the command is
   ```
 git add file1 file2 file3
@@ -71,6 +71,35 @@ git add file1 file2 file3
   git add .
   ```
   to automatically stage all the edited file
+  
+ ### Commit
+ 
+ After staging the file, a commit is used as a checkpoint for your current status. To do this, type the following command
+ ```
+ git commit -m "YOUR COMMIT MESSAGE"
+ ```
+ If it is executed successfully, you will see the following messages:
+ ```
+ [master (root-commit) 7a3c62c] commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 example.txt
+ ```
+And now if you type ```git status``` you will see:
+```
+On branch master
+nothing to commit, working tree clean
+```
+To see all the previous commits, you can use
+```
+git log
+```
+to check the detail for your commit messages. For example in this demo, it will be
+```
+commit 7a3c62cf2ba9a9152f4d6cf359c2247157774af2 (HEAD -> master)
+Author: GITHUB_USERNAME <s0000000@email.com>
+Date:   Tue Apr 17 21:54:41 2022 -0700
 
+    commit
+```
 
 ## Branches
