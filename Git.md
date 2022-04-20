@@ -3,11 +3,12 @@
 [Official Doc](https://git-scm.com/doc)
 
 ## Table of Content
-### 1. [Set up](#set-up)
-### 2. [Repo](#repo)
-### 3. [Code management](#code-management)
-### 4. [Branches](#branches)
-### 5. [Others](#others)
+### 1. [Intro](#intro)
+### 2. [Set up](#set-up)
+### 3. [Repo](#repo)
+### 4. [Code management](#code-management)
+### 5. [Branches](#branches)
+### 6. [Others](#others)
 
 ## Intro
 
