@@ -1,8 +1,8 @@
 # TripleC-Educational
 
 ### Weekly Contents:
-1. [Introduction to Git, VS code, HTML & CSS](#week-1)
-2. [Nodejs, NPM and JavaScript](#week-2)
+1. [Introduction to Git, VS code, HTML & CSS & JS](#week-1)
+2. [Nodejs, NPM and Reactjs](#week-2)
 
 ## Week 1:
 ### Introduction to Git, VS code, HTML, CSS
