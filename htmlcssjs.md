@@ -7,9 +7,12 @@
 [Official Doc for JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 ## Table of Content
-### 1. [Intro](#intro)
-### 2. [Material](#material)
-### 2. [Basic workflow](#work-flow)
+1. [Intro](#intro)
+2. [Material](#material)
+    * [HTML](#html-1)
+    * [CSS](#css-1)
+    * [JS](#js-1)
+3. [Basic workflow](#work-flow)
 
 ## Intro
 ### HTML
