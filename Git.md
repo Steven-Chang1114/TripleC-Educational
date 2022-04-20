@@ -34,7 +34,7 @@ Repositories (Repo for short) is an important concept when working with Git, it 
 
 ## Code management
 
-### Get started
+### Set up
  
 As a little demo, first we make the folder
  ```
@@ -44,7 +44,24 @@ mkdir demo
  ```
 git init
  ```
- That adds a local Git repository to the project (a hidden ```.git``` file will be added to the project). Next, we create a txt file inside the ```demo``` folder and type the following command
+ That adds a local Git repository to the project (a hidden ```.git``` file will be added to the project). Meanwhile, create a repository on GitHub and it will gives you an link such as ```https://github.com/<GITHUB_USERNAME>/<PROJECT_NAME>.git```
+ 
+ Then you need connect the local and remote repository by doing
+ ```
+ git remote add origin https://github.com/<GITHUB_USERNAME>/<PROJECT_NAME>.git
+ ```
+ 
+ Now you are good to go
+ 
+ Or there is an easier way if you think it's too complicated is simply check the ```Add a README file``` when you are creating the repository and then use
+ ```
+ git clone https://github.com/<GITHUB_USERNAME>/<PROJECT_NAME>.git
+ ```
+ to download the repo to your local machine
+ 
+ ### Get started
+ 
+ Next, we create a txt file inside the ```demo``` folder and type the following command
  ```
  git status
  ```
@@ -66,7 +83,7 @@ nothing added to commit but untracked files present (use "git add" to track)
   ```
 git add file1 file2 file3
   ```
-  where ```file1```, ```file2```, ```file3``` will be the file you edit, but you can also do
+  where ```file1```, ```file2```, ```file3``` will be the file you edited, but you can also do
   ```
   git add .
   ```
@@ -89,7 +106,7 @@ And now if you type ```git status``` you will see:
 On branch master
 nothing to commit, working tree clean
 ```
-To see all the previous commits, you can use
+[OPTIONAL ]To see all the previous commits, you can use
 ```
 git log
 ```
@@ -102,4 +119,55 @@ Date:   Tue Apr 17 21:54:41 2022 -0700
     commit
 ```
 
+If you want to go back to the previous commit, you can do
+```
+git checkout <commit-hash>
+```
+If you want to go to the most recent commit, do
+```
+git checkout master
+```
+
+### Pushing
+
+Finally you can type
+```
+git push --set-upstream origin master
+```
+or ```git push``` for short to push your code back into the remote repo and then you are done with this demo! 
+
+The last section is some other important features in git that is highly recommanded to know
+
 ## Branches
+Branch is an individual timeline of the project commits and it is needed to support multiple parallel developments. It can be illustrated by the diagram below
+![](https://www.nobledesktop.com/image/gitresources/git-branches-merge.png)
+
+By default, git has ```main``` branch (or ```master``` in older version), to create a new branch, do
+```
+git branch demo
+```
+which creates the ```demo``` branch. Then if you want to switch to ```demo``` branch, you can use
+```
+git checkout demo
+```
+So now you are on ```demo``` branch, everything you did will be stored in the  ```demo``` branch, and if you want to merge your changed in ```demo``` branch back to the ```main``` branch, you can do
+```
+git checkout main
+git merge <branch-name>
+```
+So ```git checkout main``` is to go back to the default branch, and ```git merge <branch-name>``` is to merge the changes from ```<branch-name>``` branch to the ```main``` branch
+
+Lastly, here are some other userful command for future references:
+To see all existing branch, (the * branch is the branch that you are currently on)
+```
+git branch
+```
+To delete certain branch
+```
+git branch -d <branch-name>
+```
+
+To fetch and download content from a remote repository and immediately update the local repository to match that content
+```
+git pull
+```
