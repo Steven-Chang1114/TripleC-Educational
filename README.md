@@ -8,7 +8,7 @@
 ### Introduction to Git, VS code, HTML, CSS
 ### 1. [Git](Git.md)
 ### 2. [VS code](vscode.md)
-### 3. HTML
+### 3. [HTML](html.md)
 ### 4. CSS
 
 ## Week 2:
