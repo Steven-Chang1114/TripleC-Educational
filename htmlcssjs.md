@@ -19,7 +19,8 @@
     * [JS](#js-1)
         * [ES5 and ES6](#es5-and-es6)
         * [Syntax](#syntax)
-        * [Asynchronous (Async) Programming](#asynchronous-(async)-programming)
+        * [Asynchronous (Async) Programming](#asynchronous-programming)
+        * [DOM](#dom)
 3. [Basic workflow](#work-flow)
 
 ## Intro
@@ -376,23 +377,121 @@ while (condition) {
 }
 ```
 
-#### Asynchronous (Async) Programming
-In easy words, asynchronous operation means the operation that does not take place in real-time (it will run in the background and return to realtime when it receives the result) whereas synchronous operation is always execute in order.
+#### Asynchronous Programming
+In easy words, asynchronous (async) operation means the operation that does not take place in real-time (it will run in the background and return to realtime when it receives the result) whereas synchronous operation is always execute in order. One example of asynchronous operation is making HTTP request.
+
 Before we dive deep asynchronous programming, we first need to know JavaScript is a single-threaded language which means it has a synchronous nature. Therefore, in order to achieve the asynchronous functionality, we need to understand the JavaScript run time environment and the concept of ***Event loop*** and ***Callback queue*** which will be explained in [this video](https://www.youtube.com/watch?v=FVZ-A_Akros).
 ![](https://miro.medium.com/max/1024/1*4lHHyfEhVB0LnQ3HlhSs8g.png)
 
 ##### Promise
+```Promise```  is a special JavaScript object that links the “producing code” and the “consuming code” together. In terms of our analogy: this is the “subscription list”. The “producing code” takes whatever time it needs to produce the promised result, and the “promise” makes that result available to all of the subscribed code when it’s ready.
 
-##### Fetch
+```Promise``` has three states:
+- ```pending```: initial state, neither fulfilled nor rejected.
+- ```fulfilled```: meaning that the operation was completed successfully.
+- ```rejected```: meaning that the operation failed.
+
+You can use ```.then(value)``` when the ```promise``` is successed and ```.catch(error)``` when ```promise``` failed
+
+The entire ```promise``` workflow is illustrated in the below diagram:
+![](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/promises.png)
+
+The implementation is as follows
+```
+let myPromise = new Promise((myResolve, myReject) => {
+// "Producing Code" (May take some time)
+
+  myResolve(); // when successful
+  myReject();  // when error
+});
+
+// "Consuming Code" (Must wait for a fulfilled Promise)
+myPromise
+    .then(value => { /* code if successful */ })
+    .catch(err => {/* code if successful */});
+```
+
+```myPromise``` is also chainable
+```
+myPromise
+    .then(handleResolvedA)
+    .then(handleResolvedB)
+    .then(handleResolvedC)
+    .catch(handleRejectedAny);
+```
+
+We can insert our async code inside the Producing Code and wait until it gives us a response
+
+##### Fetch API
+The Fetch API is used for accessing and manipulating parts of the HTTP pipeline, such as requests and responses.
+```fetch()``` will return a ```promise``` that we can handle using ```.then()``` and ```.catch()``` as shown in the previous section
+
+```
+fetch('http://example.com/movies.json')
+  .then(response => response.json())
+  .then(data => console.log(data));
+  .catch(err => console.log(err))
+```
+Here we are fetching a JSON file across the network and printing it to the console. The simplest use of ```fetch()``` takes one argument — the path to the resource you want to fetch — and does not directly return the JSON response body but instead returns a promise that resolves with a ```Response``` object.
+
+The ```Response``` object, in turn, does not directly contain the actual JSON response body but is instead a representation of the entire HTTP response. So, to extract the JSON body content from the ```Response``` object, we use the ```json()``` method, which returns a ***second promise*** that resolves with the result of parsing the response body text as JSON.
+
+Lastly, we use ```.catch(err)``` to handle the failing case such as network issue or ```CORS``` problem etc. You will receive a ```err``` object containing the error information such as the error message.
 
 ##### Async Await
+In ES6, there's a much more convenient way than using ```fetch()``` which we call it ```async await``` method. 
+
+```async``` is a keyword that you need to define when you are declaring the function and then you can use ```await``` keyword inside this async function, which means this function will wait for a Promise to return and then continue executing when it receives the response (no matter if it is successed or not)
+
+For example:
+```
+function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    // setTimeout is a built in async function in JS and it will return the 
+    // result after waiting certain amount of time (in this case 2000ms)
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: "resolved"
+}
+```
+Or in ES6:
+```
+const resolveAfter2Seconds = () => {
+  return new Promise(resolve => {
+    // setTimeout is a built in async function in JS and it will return the 
+    // result after waiting certain amount of time (in this case 2000ms)
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+const asyncCall = async () => {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: "resolved"
+}
+```
 
 
 #### DOM
 
-#### TypeScript
+DOM (Document Object Mode) is the data representation of the objects that comprise the structure and content of a document on the web.
 
-#### Librarys
+There is a browser API that allows developer to use JS to get access and manipulate the HTML elements that allows the webpage to be interactive.
+
+There are mainly three ways of accessing the HTML elements:
+```
+```
 
 ##### Babel
 
