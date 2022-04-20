@@ -34,4 +34,30 @@ Repositories (Repo for short) is an important concept when working with Git, it 
 
 ## Code management
 
+As a little demo, first we make the folder
+ ```
+mkdir demo
+ ```
+ And then use the following commnad
+ ```
+git init
+ ```
+ That adds a local Git repository to the project (a hidden ```.git``` file will be added to the project). Next, we create a txt file inside the ```demo``` folder and type the following command
+ ```
+ git status
+ ```
+ This is a command shows us which files have been changed or tracked, etc. If it is executed successfully, you will see
+ ```
+ On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        example.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+ ```
+
+
 ## Branches
