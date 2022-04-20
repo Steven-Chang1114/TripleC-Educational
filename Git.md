@@ -34,6 +34,8 @@ Repositories (Repo for short) is an important concept when working with Git, it 
 
 ## Code management
 
+ #### Get started
+ 
 As a little demo, first we make the folder
  ```
 mkdir demo
@@ -58,6 +60,17 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
  ```
+ 
+ #### Staging
+  Next, we will learn how to push the code from local repo back to the remote repo. To stage the file, the command is
+  ```
+git add file1 file2 file3
+  ```
+  where ```file1```, ```file2```, ```file3``` will be the file you edit, but you can also do
+  ```
+  git add .
+  ```
+  to automatically stage all the edited file
 
 
 ## Branches
