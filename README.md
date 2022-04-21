@@ -5,7 +5,7 @@
 2. [Nodejs, NPM and Reactjs](#week-2)
 
 ## Week 1:
-### Introduction to Git, VS code, HTML, CSS
+### Introduction to Git, VS code, HTML, CSS and JavaScript
 ### 1. [Git](Git.md)
 ### 2. [VS code](vscode.md)
 ### 3. [HTML](html.md)
