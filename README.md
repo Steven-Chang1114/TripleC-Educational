@@ -11,6 +11,7 @@
 ### 3. [HTML](html.md)
 ### 4. [CSS](css.md)
 ### 5. [JavaScript](js.md)
+### 6. [Project 1](project1.md)
 
 ## Week 2:
 ### Nodejs, NPM and Reactjs
