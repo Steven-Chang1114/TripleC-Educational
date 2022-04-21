@@ -1,0 +1,47 @@
+body {
+    font-family: "Gill Sans", sans-serif;
+}
+
+label {
+    margin-top: 2em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 10%;
+    padding-left: 1em;
+    padding-right: 1em; 
+    padding-top: 1em; 
+    padding-bottom: 1em; 
+}
+
+.submit {
+    align-self: center;
+    background-color: #4CAF50;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: #3e8e41
+}
+
+.submit:active {
+  background-color: black;
+}
