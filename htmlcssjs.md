@@ -21,6 +21,7 @@
         * [Syntax](#syntax)
         * [Asynchronous (Async) Programming](#asynchronous-programming)
         * [DOM](#dom)
+        * [Babel](#babel)
 3. [Basic workflow](#work-flow)
 
 ## Intro
@@ -128,7 +129,9 @@ Inside the ```head``` tag. Likewise, to load JS file into html file, do
 <script src="index.js"></script>
 ```
 
-[Tutorial (Optional)](https://www.youtube.com/watch?v=pQN-pnXPaVg)
+##### Tutorial (Optional)
+[Tutorial](https://www.youtube.com/watch?v=pQN-pnXPaVg)
+
 ### CSS
 
 Note: you can also watch this [8 minutes video](https://www.youtube.com/watch?v=Z4pCqK-V_Wo) in replacement of the below section up until ***Types of CSS*** if you prefer watching than reading
@@ -259,7 +262,9 @@ For this CSS style, you’ll only need to add the style attribute to each HTML t
 
 For most of the time, we will be using external CSS for cleaner code
 
-[Tutorial(Optional)](https://www.youtube.com/watch?v=1Rs2ND1ryYc)
+##### Tutorial (Optional)
+[Tutorial](https://www.youtube.com/watch?v=1Rs2ND1ryYc)
+
 ### JS
 #### ES5 and ES6
 ES5 (ECMAScript 2009) is the javaScript version that is released in 2009, and ES6 (ECMAScript 2015) is released in 2015. Compared with ES5, ES6 has a lot of new features that's being added on to the javaScript which divides the "old JS" with "new JS". Nowadays we are very encouraged to use the ES6 syntax over ES5, so in the following sections I will introduced both ES5 and ES6 syntax in order to let you know the difference.
@@ -487,19 +492,90 @@ const asyncCall = async () => {
 
 DOM (Document Object Mode) is the data representation of the objects that comprise the structure and content of a document on the web.
 
-There is a browser API that allows developer to use JS to get access and manipulate the HTML elements that allows the webpage to be interactive.
+There is a browser API that allows developer to use JS to get access and manipulate the HTML elements (DOM) that allows the webpage to be interactive.
 
+![](https://www.w3schools.com/js/pic_htmltree.gif)
+As the graph above is shown, the root of the DOM is ```document``` object.
+
+##### Selectors
 There are mainly three ways of accessing the HTML elements:
 ```
+const element1 = document.getElementById("idname");
+const element2 = document.getElementsByClassName("classname");
+const element3 = document.querySelector(".classname");
+const element4 = document.querySelector("#idname");
+const element5 = document.querySelector("h1");
 ```
+The above code is corresponding to the following HTML code:
+```
+<!DOCTYPE html>
+<html>
+    <body style="background-color:black;">
+    
+        <h1>Tutorials</h1>
+        <p class="classname">This is first paragraph.</p>
+        <button id="idname">Click me</button>
+    
+    </body>
+</html>
+```
+The result is ```element1``` and ```element4``` both points to ```<button id="idname">Click me</button>```, ```element2``` and ```element3``` points to ```<p class="classname">This is first paragraph.</p>```, and lastly ```element5``` points to ```<h1>Tutorials</h1>```.
+
+To know all the selectors, visit [this document](https://blog.bitsrc.io/dom-selectors-explained-70260049aaf0)
+
+##### Event listeners
+
+After selecting the corresponding elements, we can add event listeners to enable the user interaction. The syntax is as follows:
+```
+element.addEventListener(event, callbackFunction, useCapture);
+```
+For example, with the above HTML code, we can do
+```
+const button = document.getElementById("idname");
+
+const btnOnPressed = () => {
+    console.log("CLICKED!")
+}
+
+button.addEventListener("click", btnOnPressed , false);
+```
+Now if you click the button on the webpage, it will print ```CLICKED``` on the console everytime you click the button. We will explain each arguments below
+
+- ```click``` is one of the events in event listeners, to see the full list of events, go to [this website](https://www.w3schools.com/jsref/dom_obj_event.asp)
+- ```btnOnPressed``` is the callback function, which means this function will be triggered when the event (```click``` in this case) is triggered.
+- ```false``` means ```useCapture=false```, and ```useCapture``` is false by default, which means the event will use the bubbling propagation, and when the value is set to true, the event uses the capturing propagation. 
+To fully understand this, you need to know the concept of event propagation: ***Event Bubbling*** and ***Event Capturing***. Event propagation is a way of defining the element order when an event occurs. If you have a <p> element inside a <div> element, and the user clicks on the <p> element, which element's "click" event should be handled first?
+    * ***Event Bubbling***: the inner most element's event is handled first and then the outer: the <p> element's click event is handled first, then the <div> element's click event.
+    * ***Event Capturing***: the outer most element's event is handled first and then the inner: the <div> element's click event will be handled first, then the <p> element's click event.
+
+In addition, you can write the same function in short
+```
+const button = document.getElementById("idname");
+
+button.addEventListener("click", () => {
+    console.log("CLICKED!")
+});
+```
+
+If you want to know more about what you can do with DOM (such as manipluate the HTML element or change the style using CSS), check out [this website](https://www.w3schools.com/js/js_htmldom.asp)
 
 ##### Babel
 
-[Tutorial (JS) (Optional)](https://www.youtube.com/watch?v=PkZNo7MFNFg)
+[Official Doc](https://babeljs.io/)
 
-[JS Advanced (Highly recommended to watch if you want to do frontend dev as a profession) (Optional)](https://www.youtube.com/watch?v=Bv_5Zv5c-Ts)
+Even though new version of JS will be released in almost every year that brings new features and stronger syntax, the old browser might not able to execute the new version of JS. Therefore it's time for Babel to comes into play.
 
-[Tutorial (DOM) (Optional)](https://www.youtube.com/watch?v=y17RuWkWdn8)
+Babel is a transcompiler that converts ECMAScript 2015+ (ES6+) code into a backwards compatible version of JavaScript that can be run by older JavaScript engines. You are not required to know the detail of Babel, you just need to know it exists and it's essential for front-end engineering.
+
+However if you want to learn more detail about Babel, [this video](https://www.youtube.com/watch?v=C2PDAGCrk_g) is a good starting point
+
+##### Tutorial (Optional)
+
+[Tutorial (JS)](https://www.youtube.com/watch?v=PkZNo7MFNFg)
+
+[JS Advanced (Highly recommended to watch if you want to do frontend dev as a profession)](https://www.youtube.com/watch?v=Bv_5Zv5c-Ts)
+
+[Tutorial (DOM)](https://www.youtube.com/watch?v=y17RuWkWdn8)
 
 ## Basic Workflow
 
