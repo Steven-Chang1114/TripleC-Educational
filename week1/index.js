@@ -6,7 +6,7 @@ button.addEventListener('click', event => {
     const age = document.querySelector("#age")
     const userStatus = document.querySelector("input[name='status']:checked")
 
-    if (userName && age && userStatus) {
+    if (userName.value && age.value && userStatus.value) {
         console.log(`Your name is ${userName.value}, ${age.value} years old, and you are a ${userStatus.value} in UCSD`)
     } else {
         console.log("Please fill in all the information!")
