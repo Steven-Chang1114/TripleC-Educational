@@ -317,7 +317,7 @@ button.addEventListener("click", () => {
 
 If you want to know more about what you can do with DOM (such as manipluate the HTML element or change the style using CSS), check out [this website](https://www.w3schools.com/js/js_htmldom.asp)
 
-### Babel
+## Babel
 
 [Official Doc](https://babeljs.io/)
 
