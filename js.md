@@ -300,7 +300,7 @@ button.addEventListener("click", btnOnPressed , false);
 Now if you click the button on the webpage, it will print ```CLICKED``` on the console everytime you click the button. We will explain each arguments below
 
 - ```click``` is one of the events in event listeners, to see the full list of events, go to [this website](https://www.w3schools.com/jsref/dom_obj_event.asp)
-- ```btnOnPressed``` is the callback function, which means this function will be triggered when the event (```click``` in this case) is triggered.
+- ```btnOnPressed``` is the callback function, which means this function will be triggered when the event (```click``` in this case) is triggered, and it will automtically pass a ```event``` object. More details [here](https://www.w3schools.com/jsref/dom_obj_event.asp)
 - ```false``` means ```useCapture=false```, and ```useCapture``` is false by default, which means the event will use the bubbling propagation, and when the value is set to true, the event uses the capturing propagation. 
 To fully understand this, you need to know the concept of event propagation: ***Event Bubbling*** and ***Event Capturing***. Event propagation is a way of defining the element order when an event occurs. If you have a <p> element inside a <div> element, and the user clicks on the <p> element, which element's "click" event should be handled first?
     * ***Event Bubbling***: the inner most element's event is handled first and then the outer: the <p> element's click event is handled first, then the <div> element's click event.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Week 1 tutorial project</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>User signup form</h1>
+            <form>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="age">Age:</label><br>
+                <input type="number" id="age" name="age"><br>
+                <div class="schoolYear">
+                    <p>Your status:</p>
+                    <input type="radio" id="freshman" name="status" value="freshman">
+                    <label for="freshman">Freshman</label><br>
+                    <input type="radio" id="css" name="status" value="sophomore">
+                    <label for="sophomore">Sophomore</label><br>
+                    <input type="radio" id="junior" name="status" value="junior">
+                    <label for="junior">Junior</label><br>
+                    <input type="radio" id="senior" name="status" value="senior">
+                    <label for="senior">Senior</label><br>
+                </div>
+                <input class="submit" type="submit" value="Submit">
+            </form>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>

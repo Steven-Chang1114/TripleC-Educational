@@ -40,7 +40,7 @@ The elements used in the above code example is explained below:
 
 Most of the work will be done inside the ```body``` tag, below is the list of the commonly used html tags:
 - ```<p>``` paragraph tag
-- ```<h1>``` to ```<h6>``` header tag
+- ```<h1>``` to ```<h6>``` header tag from largest to smallest font size
 - ```<hr>``` thematic change in the content
 - ```<br>``` line break
 - ```<img>``` image tag
@@ -65,6 +65,7 @@ HTML attributes are a modifier of an HTML element type. An attribute either modi
 Here are the two most famous attribute in ```html```:
 - ```class```
 - ```id```
+
 They both are used as a reference for CSS in a style sheet. They can also be used by as a reference in JavaScript to access and manipulate elements in the DOM. The difference between ```class``` and ```id``` is that ```id``` is unique in a page and can only apply to at most one element, while ```class``` selector can apply to multiple elements. 
 
 To use the attribute, you can do
@@ -96,10 +97,18 @@ Lastly, to load CSS file into html file, do
 ```
 <link rel="stylesheet" href="style.css">
 ```
-Inside the ```head``` tag. Likewise, to load JS file into html file, do
+Inside the ```head``` tag. 
+
+Likewise, to load JS file into html file, do
 ```
 <script src="index.js"></script>
 ```
+But remember to put it at the ***last line*** of ```body``` tag or it will cause bugs!
+
+## Example code
+
+A working html example code will be as follows
+![](https://wpshout.com/wp-content/uploads/2019/02/html_example-475x400.png)
 
 ## Tutorial (Optional)
 [Tutorial](https://www.youtube.com/watch?v=pQN-pnXPaVg)
