@@ -2,12 +2,12 @@ const button = document.querySelector(".submit")
 
 button.addEventListener('click', event => {
     event.preventDefault()
-    const userName = document.querySelector("#name").value
-    const age = document.querySelector("#age").value
-    const userStatus = document.querySelector("input[name='status']:checked").value
+    const userName = document.querySelector("#name")
+    const age = document.querySelector("#age")
+    const userStatus = document.querySelector("input[name='status']:checked")
 
     if (userName && age && userStatus) {
-        console.log(`You are ${userName} that is ${age} years old, and you are a ${userStatus} in UCSD`)
+        console.log(`Your name is ${userName.value}, ${age.value} years old, and you are a ${userStatus.value} in UCSD`)
     } else {
         console.log("Please fill in all the information!")
     }
