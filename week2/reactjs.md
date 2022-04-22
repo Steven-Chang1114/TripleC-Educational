@@ -8,15 +8,27 @@
 ### 3. [Layout](#layout)
 ### 4. [JSX](#jsx)
 ### 5. [Components](#components)
-* [Functional and Class Component](#functional-and-class-component)
-* [Props](#props)
-  * [Parent to Child](#parent-to-child)
-  * [Child to Parent](#child-to-parent)
-* [Event](#event)
-* [Lifecycle](#lifecycle)
-* [Hooks](#hooks)
-  * [State](#state)
-  * [Effect](#effect)
+- [Reactjs](#reactjs)
+  - [Table of Content](#table-of-content)
+    - [1. Intro](#1-intro)
+    - [2. Set up](#2-set-up)
+    - [3. Layout](#3-layout)
+    - [4. JSX](#4-jsx)
+    - [5. Components](#5-components)
+    - [6. Styling](#6-styling)
+    - [7. Webpack](#7-webpack)
+  - [Intro](#intro)
+  - [Set up](#set-up)
+  - [Layout](#layout)
+  - [JSX](#jsx)
+  - [Components](#components)
+    - [Functional and Class Component](#functional-and-class-component)
+    - [Props](#props)
+      - [Parent to Child](#parent-to-child)
+      - [Child to Parent](#child-to-parent)
+  - [Event](#event)
+  - [Lifecycle](#lifecycle)
+  - [Tutorial (Optional)](#tutorial-optional)
 ### 6. [Styling](#styling)
 ### 7. [Webpack](#webpack)
 
@@ -208,7 +220,7 @@ export default Counter;
 ### Props
 When dealing with different components, if becomes a problem how to communicate or tansfer data between each components, now that's when Props comes into play. There are two main types of data transfer: ***Parent to Child*** and ***Child to Parent***
 
-### Parent to Child
+#### Parent to Child
 For example this is our ```App.js``` file
 ```
 // App.js
@@ -279,13 +291,117 @@ const Name = (props) => {
   
   export default Name;
 ```
+or
+```
+// Name.js
+const Name = ({text}) => {
+    return (
+      <div>
+        {text}
+      </div>
+    );
+  }
+  
+  export default Name;
+```
+By using the ```destructuring``` feature in javaScript
+
 Notice it's being wrapped inside ```{}``` because again ```props``` is a javaScipt object and ```props.text``` is one of it's properties. Now the webpage looks like this
 ![](name.png)
 
 Now you know how to pass the value from parent component down to the child component, and next we will learn how to pass value from child component from parent component.
 
-### Child to Parent
+#### Child to Parent
+Similar as ***Parent to Child***, you need to make use of ```props```. Take the following code example
+```
+// App.js
+import Button from "./Button.js"
 
+const App = () => {
+  return (
+    <div className="App">
+      <h1>Hello</h1>
+      <Button/>
+    </div>
+  );
+}
+
+export default App;
+```
+```
+// Button.js
+const Button = (props) => {
+    return (
+      <div>
+        <button>Click Me</button>
+      </div>
+    );
+  }
+  
+export default Button;
+```
+The webpage now looks like this
+![](btnbefore.png)
+Our goal is when we click the ```Click Me``` button, the ```Hello``` header will change it's text to ```CLICK```. To achieve this, we need to make use of the callback function
+
+The final code will be like this
+```
+\\ App.js
+import { useState } from "react"
+import Button from "./Button.js"
+
+const App = () => {
+  const [txt, setTxt] = useState("Hello") \\ Will cover that in Hooks
+
+  const updateText = (value) => {
+    setTxt(value)
+  }
+
+  return (
+    <div className="App">
+      <h1>{txt}</h1>
+      <Button updateText={updateText}/>
+    </div>
+  );
+}
+
+export default App;
+```
+For ```const [txt, setTxt] = useState("Hello")``` we will talk more in later section, but in short, you can take ```txt``` as a variable that in default has the ```Hello``` value and being injected into the ```<h1>``` tag. In other words, our goal is when we click the button, the ```txt``` variable will get changed from ```Hello``` to ```CLICK```
+
+```updateText``` function is the callback function that we put into the ```Button``` component as a prop that can receive the value inside ```Button``` component and bring it back to the ```App``` component, and that's all for the parent component side. For child component (```Button```), the code is like this:
+```
+const Button = (props) => {
+    const onBtnPressed = () => {
+      props.updateText("CLICK")
+    }
+
+    return (
+      <div>
+        <button onClick={onBtnPressed}>Click Me</button>
+      </div>
+    );
+  }
+  
+  export default Button;
+```
+
+```onClick``` is one of the event attribute that's built in React, and it means ```onBtnPressed``` will get triggered when the user click the ```<button>``` tag.
+
+Inside of ```onBtnPressed```, the ```props.updateText("CLICK")``` gets called with the value ```CLICK``` as the argument. What will happen under the hood is the ```props.updateText``` in ```Button.js``` is actually the same function ```updateText()``` in ```App.js```. Therefore the same function is called inside ```Button.js``` but gets executed inside ```App.js```, so ```App.js``` can get the value from its child component, and we update the ```txt``` vallue using ```setTxt()``` (We will talk more about it in [Hooks](#hooks)). Now we are done!
+
+## Event
+```onClick``` is one of the event that's built into React, and a list of events will be given [here](https://livebook.manning.com/book/react-quickly/chapter-6/28)
+
+Some important events are listed as follows:
+
+```onClick```
+
+```onChange```
+
+```onSubmit```
+
+## Lifecycle
 
 ## Tutorial (Optional)
 
