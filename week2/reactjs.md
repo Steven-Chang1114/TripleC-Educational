@@ -8,15 +8,30 @@
 ### 3. [Layout](#layout)
 ### 4. [JSX](#jsx)
 ### 5. [Components](#components)
-* [Functional and Class Component](#functional-and-class-component)
-* [Props](#props)
-  * [Parent to Child](#parent-to-child)
-  * [Child to Parent](#child-to-parent)
-* [Event](#event)
-* [Lifecycle](#lifecycle)
-* [Hooks](#hooks)
-  * [State](#state)
-  * [Effect](#effect)
+- [Reactjs](#reactjs)
+  - [Table of Content](#table-of-content)
+    - [1. Intro](#1-intro)
+    - [2. Set up](#2-set-up)
+    - [3. Layout](#3-layout)
+    - [4. JSX](#4-jsx)
+    - [5. Components](#5-components)
+    - [6. Styling](#6-styling)
+    - [7. Webpack](#7-webpack)
+  - [Intro](#intro)
+  - [Set up](#set-up)
+  - [Layout](#layout)
+  - [JSX](#jsx)
+  - [Components](#components)
+    - [Functional and Class Component](#functional-and-class-component)
+    - [Props](#props)
+      - [Parent to Child](#parent-to-child)
+      - [Child to Parent](#child-to-parent)
+    - [Event](#event)
+    - [Lifecycle](#lifecycle)
+    - [Hooks](#hooks)
+      - [State](#state)
+      - [Effect](#effect)
+  - [Tutorial (Optional)](#tutorial-optional)
 ### 6. [Styling](#styling)
 ### 7. [Webpack](#webpack)
 
@@ -378,7 +393,7 @@ const Button = (props) => {
 
 Inside of ```onBtnPressed```, the ```props.updateText("CLICK")``` gets called with the value ```CLICK``` as the argument. What will happen under the hood is the ```props.updateText``` in ```Button.js``` is actually the same function ```updateText()``` in ```App.js```. Therefore the same function is called inside ```Button.js``` but gets executed inside ```App.js```, so ```App.js``` can get the value from its child component, and we update the ```txt``` vallue using ```setTxt()``` (We will talk more about it in [Hooks](#hooks)). Now we are done!
 
-## Event
+### Event
 ```onClick``` is one of the event that's built into React, and a list of events will be given [here](https://livebook.manning.com/book/react-quickly/chapter-6/28)
 
 Some important events are listed as follows:
@@ -389,7 +404,31 @@ Some important events are listed as follows:
 
 ```onSubmit```
 
-## Lifecycle
+### Lifecycle
+
+Every components in React has ```lifecycle``` which is it's phase from creation to deletion. On each phase there's a built in function that will be called in order to help the developers to achieve some effects. For example if you want to delete all data when the component disappears, you can do it in deletion phase, or if you want to fetch some data from external server everytime this components gets rendered, you can do it in creation phase.
+
+The full lifecycle is given in the graph below
+![](https://programmingwithmosh.com/wp-content/uploads/2018/10/Screen-Shot-2018-10-31-at-1.44.28-PM-1024x567.png)
+
+The full lifecycle explaination is given [here](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/). I will just introduce some important lifecycle methods.
+
+```componentDidMount()``` is invoked immediately after a component is mounted
+```componentDidUpdate()``` is invoked immediately after updating occurs
+```componentWillUnmount()``` is invoked immediately before a component is unmounted and destroyed
+
+***Note: All those function is being used in Class Component, I teach them because their names are intuitive. in Functional Component (The component that we use, we will use these lifecycle methods as Hooks, which will be introduced in [Hooks](#hooks) section)***
+
+### Hooks
+
+In the previous sections, you have seen the use of ```Hooks``` many times already. Now we are ready to learn it. ```Hooks``` is a special feature introduced in Functional Component to replace some of the functionalities in Class Component such as ***state*** and ***lifecycle method (as Effect)***
+
+```Hooks``` is a very important concept in modern React, for full information, you can check out [this doc](https://reactjs.org/docs/hooks-intro.html). In this educational program, we will go over the two most important hooks: ```useState()``` and ```useEffect()```
+
+#### State
+
+#### Effect
+
 
 ## Tutorial (Optional)
 
