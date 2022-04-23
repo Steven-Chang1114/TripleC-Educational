@@ -25,13 +25,13 @@
 
 ## Intro
 
-React is a front-end JavaScript library for building user interfaces, and currently it's one of the most popular frameworks in the communities, others are Vuejs, Angular and svelte etc.
+React is a front-end JavaScript framework for building user interfaces, and currently it's one of the most popular frameworks in the communities, the others are Vuejs, Angular and Svelte etc.
 
-The main characteristic of React is it encourage developers to write pure functional code and make use of the concept of functional programming, and it also supports mobile app development (React Native) which you can learn more in [this doc](https://reactnative.dev/), but in this program, we will be focusing on React
+The main characteristic of React is it encourages developers to write purely functional code and make use of the concept of functional programming, and it also supports mobile app development (React Native) which you can learn more in [this doc](https://reactnative.dev/), but in this program, we will be focusing on React
 
 ## Set up
 
-To create an react project, after installing nodejs and npm, simply run:
+To create an React project, after installing nodejs and npm, simply run:
 ```
 npx create-react-app my-app
 ```
@@ -40,9 +40,9 @@ This will create a react project called ```my-app```
 On VS code, you will see the following file system
 ![](reactsetup.png)
 
-Don't get scared away, the important file that you need to focusing on is ```package.json``` and ```src``` folder.
+Don't get scared away, the most important file that you need to focusing on is ```package.json``` and ```src``` folder.
 
-```src``` folder is the source folder, most of your code will be written here, the code starts from ```index.js``` with the root components as ```App.js``` and then your code will be expand from here. For more information, you will learn in the [Components](components) section
+```src``` folder is the source folder, most of your code will be written inside, the code starts from ```index.js``` with the root components as ```App.js``` and then your code will be expanded from here. You will learn more in the [Components](components) section
 
 ```package.json``` contains the project information such as all the installed libraries information and scripts that you can run, for example to start the local host server, you can run ```npm run start``` in the terminal.
 
@@ -52,7 +52,7 @@ And it is running on ```http://localhost:3000``` which is our local host server
 
 ## Layout
 
-Now we will look closely into ```index.js``` and ```App.js```. ```index.js``` is shown as follow:
+Now let's look closely into ```index.js``` and ```App.js```. ```index.js``` is shown as follow:
 ```
 //index.js
 import React from 'react';
@@ -71,7 +71,7 @@ root.render(
 reportWebVitals();
 ```
 
-Notice the ```root``` object, we can see there is a DOM operation as an argument being passed into ```ReactDOM.createRoot()``` function. To understand this, let's take a look of the ```index.html``` file in the ```public``` folder:
+Notice the ```root``` object, we can see there is a DOM operation that's passed into ```ReactDOM.createRoot()``` function as an argument. To understand this, let's take a look of the ```index.html``` file in the ```public``` folder:
 
 ```
 <!DOCTYPE html>
@@ -97,7 +97,7 @@ Notice the ```root``` object, we can see there is a DOM operation as an argument
 
 ```
 
-Notice in the ```body``` there's a ```<div></div>``` with ```id="root"```. Therefore, ```ReactDOM.createRoot(document.getElementById('root'));``` basically means whatever the contents we wrote in ```root```, it will be injected into the empty ```<div>``` tag. In this case is the content inside ```App.js```, and if we change the content in ```App.js``` as
+Notice in the ```body``` tag, there's a ```<div></div>``` with ```id="root"```. Therefore, ```ReactDOM.createRoot(document.getElementById('root'));``` basically means that whatever the contents we wrote in ```root```, it will be injected into the empty ```<div>``` tag. In this case is the content inside ```App.js```, and if we change the content in ```App.js``` as
 ```
 //App.js
 const App = () => {
@@ -116,7 +116,7 @@ You will see the following
 This is basically how React works
 
 ## JSX
-Taking the ```App.js``` code above as an example, JSX is a html-like syntax that is being used in React, they have some syntax difference. For example ```class``` attribute in HTML becomes ```className``` in JSX, and JSX also combines the functionality of eventlistener for example JSX has ```onClick``` attribute which is basically ```addEventListener('click',()=>{})```. We will be using JSX extensively when writing React.
+Taking the ```App.js``` code above as an example, JSX is a html-like syntax that is being used in React with some syntax difference. For example the ```class``` attribute in HTML becomes ```className``` in JSX. JSX also combines the functionality of ```eventListener```, for example JSX has ```onClick``` attribute which is basically ```addEventListener('click',()=>{})```. We will be using JSX extensively when writing React.
 
 Another important difference is JSX allows ***Embedding Expressions*** in React. For example ```App.js``` can be written equivalently as follows
 ```
@@ -135,13 +135,13 @@ export default App;
 ```
 The result will still be
 ![](appjs.png)
-You can put any valid JavaScript expression inside the ```{}``` expression such as ```{2+3}```, ```{person.firstname}```. It will get executed based on the JavaScript rule
+You can put any valid JavaScript expressions inside the ```{}``` expression such as ```{2+3}```, ```{person.firstname}```. It will get executed based on the JavaScript rule
 
 
 ## Components
 ```App.js``` itself is a component in React, and when importing ```App``` component into other file or component, it will becomes a tag like normal HTML tag.
 
-For example when importing ```App``` component into ```index.js```, you can see they use the syntax ```<App />``` it is called self closing tag. By coding convention, the component name should be capitalized such as ```App.js```
+For example when importing ```App``` component into ```index.js```, you can see they use the syntax ```<App />```. It is called self closing tag. By coding convention, the component name should always be capitalized such as ```App.js```
 
 ***Note, as the name suggests, when you are writing the components, it can only take one component inside ```return``` function, therefore you need to wrap everything inside the ```div``` tag as I have shown in the ```App.js``` example***
 
@@ -206,10 +206,10 @@ class Counter extends React.Component{
 export default Counter;
 ```
 
-***Class Component*** is more OOP style while ***Functional Component*** is more FP style. According to the React official doc, developers are encouraged to use ***Functional Component***, so for the later section, we will use ***Functional Component*** when showing the code example.
+***Class Component*** is more of OOP style while ***Functional Component*** is more of FP style. According to the React official doc, developers are encouraged to use ***Functional Component***, so for the later section, we will use ***Functional Component*** to write the code example.
 
 ### Props
-When dealing with different components, if becomes a problem how to communicate or tansfer data between each components, now that's when Props comes into play. There are two main types of data transfer: ***Parent to Child*** and ***Child to Parent***
+When dealing with different components, it becomes a problem that how do we communicate or tansfer data between each components. That's why we need Props to solve this issue. There are two main types of data transfer: ***Parent to Child*** and ***Child to Parent***
 
 #### Parent to Child
 For example this is our ```App.js``` file
@@ -240,9 +240,9 @@ const Name = (props) => {
   
 export default Name;
 ```
-Notice I put ```props``` argument inside the ```Name``` function (in functional component, a component is also a function), ```props``` is a argument that React gives to enable data transfer between components, you can also use another name such as ```const Name = (data) => {}```, but by coding convention, we will be using ```props```
+Notice I put ```props``` argument inside the ```Name``` function (in functional component, a component is also a function), ```props``` is an argument that React gives to enable data transfer between components, you can also pick another name such as ```const Name = (data) => {}```, but by coding convention, we will be using ```props```
 
-You might also notice there's ```export default COMPONENT_NAME;``` at the end of each component file, this is used to allow the other files import this component file.
+You might also notice there's ```export default COMPONENT_NAME;``` at the end of each component file, this is used to allow the other files to import this component file.
 
 Now in ```App.js```, let's import ```Name.js```
 ```
@@ -265,11 +265,11 @@ As I said in the beginning of ***Components Section*** , ```Name``` component be
 
 Also we notice inside the ```Name``` tag, there's a ```text``` attribute with the value ```"My name is Steven"``` inside the ```{}```. As I said before, if you want to write JavaScript code inside JSX, you have to use ```{}``` to wrap them up.
 
-```text``` attribute is a custom attribute that is given to ```Name``` component so we can access it in ```Name.js``` using ```props``` object like ```props.text```. 
+```text``` attribute is a custom attribute that is given to ```Name``` component so we can access it in ```Name.js``` using ```props``` object such as ```props.text```. 
 
-***Note ```text``` is not a built in attribute, we could of give it other name such as ```<Name name={"My name is Steven"}/>```***
+***Note ```text``` is not a built in attribute, we could of give it another name such as ```<Name name={"My name is Steven"}/>```***
 
-Now in order to retrive the value in ```Name.js```, we do the following
+Now in order to present the value in ```Name.js```, we do the following
 ```
 // Name.js
 const Name = (props) => {
@@ -295,15 +295,15 @@ const Name = ({text}) => {
   
   export default Name;
 ```
-By using the ```destructuring``` feature in javaScript
+By using the ```destructuring``` feature in JavaScript
 
-Notice it's being wrapped inside ```{}``` because again ```props``` is a javaScipt object and ```props.text``` is one of it's properties. Now the webpage looks like this
+Notice it's being wrapped inside ```{}``` because again ```props``` is a JavaScript object and ```props.text``` is one of it's properties. Now the webpage looks like this
 ![](name.png)
 
-Now you know how to pass the value from parent component down to the child component, and next we will learn how to pass value from child component from parent component.
+That's how to pass the value from parent component down to the child component, next we will learn how to pass value from child component to parent component.
 
 #### Child to Parent
-Similar as ***Parent to Child***, you need to make use of ```props```. Take the following code example
+Similar as ***Parent to Child***, you need to make use of the ```props```. Take the following code example
 ```
 // App.js
 import Button from "./Button.js"
@@ -335,7 +335,7 @@ The webpage now looks like this
 ![](btnbefore.png)
 Our goal is when we click the ```Click Me``` button, the ```Hello``` header will change it's text to ```CLICK```. To achieve this, we need to make use of the callback function
 
-The final code will be like this
+The final code looks like this
 ```
 \\ App.js
 import { useState } from "react"
@@ -358,9 +358,11 @@ const App = () => {
 
 export default App;
 ```
-For ```const [txt, setTxt] = useState("Hello")``` we will talk more in later section, but in short, you can take ```txt``` as a variable that in default has the ```Hello``` value and being injected into the ```<h1>``` tag. In other words, our goal is when we click the button, the ```txt``` variable will get changed from ```Hello``` to ```CLICK```
+For ```const [txt, setTxt] = useState("Hello")``` we will talk more in the [Hooks](#hooks) section, but in short, you can take ```txt``` as a variable that in default has the ```Hello``` value and being injected into the ```<h1>``` tag. In other words, our goal is when we click the button, the ```txt``` variable will get changed from ```Hello``` to ```CLICK```
 
-```updateText``` function is the callback function that we put into the ```Button``` component as a prop that can receive the value inside ```Button``` component and bring it back to the ```App``` component, and that's all for the parent component side. For child component (```Button```), the code is like this:
+```updateText``` function is the callback function that we put into the ```Button``` component as an ```attribute``` that can get accessed inside the ```Button``` component as a ```prop```, and this function is being used to bring the targeted value back to the ```App``` component. That's all for the parent component side. 
+
+For child component (```Button```), the code is like this:
 ```
 const Button = (props) => {
     const onBtnPressed = () => {
@@ -379,7 +381,7 @@ const Button = (props) => {
 
 ```onClick``` is one of the event attribute that's built in React, and it means ```onBtnPressed``` will get triggered when the user click the ```<button>``` tag.
 
-Inside of ```onBtnPressed```, the ```props.updateText("CLICK")``` gets called with the value ```CLICK``` as the argument. What will happen under the hood is the ```props.updateText``` in ```Button.js``` is actually the same function ```updateText()``` in ```App.js```. Therefore the same function is called inside ```Button.js``` but gets executed inside ```App.js```, so ```App.js``` can get the value from its child component, and we update the ```txt``` vallue using ```setTxt()``` (We will talk more about it in [Hooks](#hooks)). Now we are done!
+Inside of ```onBtnPressed```, the ```props.updateText("CLICK")``` gets called with the value ```CLICK``` as the argument. What will happen under the hood is the ```props.updateText``` in ```Button.js``` is actually the function ```updateText()``` in ```App.js```. Therefore the exact function is called inside ```Button.js``` but gets executed inside ```App.js```, so ```App.js``` can get the value from its child component, and lastly we update the ```txt``` vallue using ```setTxt()``` (We will talk more about it in [Hooks](#hooks)). Now we are done!
 
 ### Event
 ```onClick``` is one of the event that's built into React, and a list of events will be given [here](https://livebook.manning.com/book/react-quickly/chapter-6/28)
@@ -411,7 +413,7 @@ The full lifecycle explaination is given [here](https://projects.wojtekmaj.pl/re
 
 In the previous sections, you have seen the use of ```Hooks``` many times already. Now we are ready to learn it. ```Hooks``` is a special feature introduced in Functional Component to replace some of the functionalities in Class Component such as ***state*** and ***lifecycle method (as Effect)***
 
-```Hooks``` is a very important concept in modern React, for full information, you can check out [this doc](https://reactjs.org/docs/hooks-intro.html). In this educational program, we will go over the two most important hooks: ```useState()``` and ```useEffect()```
+```Hooks``` is a very important concept in modern React. For more information, you can check out [this doc](https://reactjs.org/docs/hooks-intro.html). In this educational program, we will only go over the two most important hooks: ```useState()``` and ```useEffect()```
 
 #### State
 ```State``` is a form of dynamic storage that exists in each components. To use the ```state``` you first need to import from ```react``` package
@@ -443,14 +445,14 @@ export default App;
 ```
 ```useState``` is used inside the component (Inside ```const App = () => {}```), it will returns an array of two elements, state, and the function to update this state.
 
-Take the example code above as an example: ```txt``` is the state value and ```setTxT``` is the function to change ```txt```. The default value (```Hello``` in this case) is being passed as the parameter into ```useState```.
+As the example code has shown: ```txt``` is the state value and ```setTxT``` is the function to update ```txt```. The default value (```Hello``` in this case) is being passed as the parameter into ```useState```.
 
 To change the value, use ```setTxt("Hi")```, now the ```txt``` holds the value ```Hi```. 
 
-Both ```txt``` and ```setTxt``` is not built in value in React, the developer needs name them.
+Both ```txt``` and ```setTxt``` is not built-in value in React, the developer names them.
 
 #### Effect
-In short, ```effect``` hooks is to mimic the lifecycle methods in Class Component, the syntax is as follows, first you need to import ```useEffect``` hook
+In short, ```effect``` hooks is used to mimic the lifecycle methods in Class Component, the syntax is as follows, first you need to import ```useEffect``` hook
 ```
 import { useEffect } from 'react';
 ```
@@ -462,7 +464,7 @@ useEffect(() => {
 ```
 This means the console will print ```Hello``` everytime this component rerender.
 
-```useEffect``` method has two argument: callback function and a "trigger" variable. Callback function is called everytime when the corresponding life cycle method gets triggered, and the "trigger" variable indicates which lifecycle methods ```useEffect``` hook is mapping to. There are few example:
+```useEffect``` method has two argument: callback function and a "trigger" variable. Callback function is called everytime when the corresponding life cycle method gets triggered, and the "trigger" variable indicates which lifecycle methods ```useEffect``` hook is mapping to. There are few examples:
 ```
 useEffect(() => {
     console.log("Hello")
@@ -489,7 +491,7 @@ useEffect(() => {
     }
 }, []);
 ```
-The above code is a ```componentDidMount``` effect hook, but the focus here is the ```return``` function inside ```useEffect```, this is triggered before the component unmounting, so this is the way to implement ```componentWillUnmount```
+The above code is a ```componentDidMount``` effect hook, but the focus here is the ```return``` function inside ```useEffect```, this is triggered before the component unmounts, so this is the way to implement ```componentWillUnmount```
 
 ## Styling
 
@@ -518,7 +520,7 @@ const App = () => {
 export default App;
 
 ```
-Use ```style``` as the attribute and change the CSS properties name to be camelCased because it's a javaScript object. In JSX, JavaScript expressions are written inside curly braces, and since JavaScript objects also use curly braces, the styling in the example above is written inside two sets of curly braces ```{{}}```
+Use ```style``` as the attribute and change the name of the regular CSS properties to be camelCased because it's in a JavaScript object. In JSX, JavaScript expressions are written inside curly braces, and since JavaScript objects also use curly braces, the styling in the example above is written inside two sets of curly braces ```{{}}```
 
 ### JavaScript Object
 Equivalently you can do
@@ -552,7 +554,7 @@ const App = () => {
 
 export default App;
 ```
-Here you define a ```styles``` object with all the CSS properties in this page and you map the corresponing CSS styles to the HTML elements as a JS object
+Here you define a ```styles``` object with all the CSS properties in this component, and you map the corresponing CSS styles to the HTML elements as a JS object
 
 ### CSS Stylesheet
 Create a new file called ```App.css```. By the coding convention, the CSS and JS file shares the same component name: ```App.css``` with ```App.js```, ```Button.css``` with ```Button.js``` etc.
@@ -595,15 +597,15 @@ Now we done! Here's the result webpage
 ## Webpack
 [Officla Doc](https://webpack.js.org/)
 
-In a modern web application, the working directories will usually get massive with a lot of nested Components and codes from third party libraries. In addtion to that, some of our ES6 syntax won't work on older browser, so it becomes a problem that the web application might work on one's machine but break on another. Even if you make it works, the final size of the JS files will be HUGE. Therefore it's time for Webpack comes into play.
+In a modern web application, the working directories will usually becomes massive with a lot of nested Components and codes from third party libraries. In addtion to that, some of our ES6 syntax won't work on older browser, so it becomes a problem that the web application might work on one's machine but break on another. What's worse is even if you eventually make it works, the final size of the JS files will be HUGE. Therefore it's time for Webpack to come into play.
 
-Webpack is a module bundler that not only combines and minifies the JS and CSS files, it also handles the assets such as images. In short words, Webpack is used to solve all those previously mentioned problems. The better part is React handles Webpack for the developers, so it eventually becomes a simple command
+Webpack is a module bundler that not only combines and minifies the JS and CSS files, it also handles the assets such as images. In short words, Webpack is used to solve all those previously mentioned problems. And even better, React handles the configuration of Webpack for the developers, so it eventually becomes a simple command
 ```
 npm run build
 ```
-After it's done, you can see a ```build``` folder inside your working directory, and that folder contains the exactly same information in your working directory but it's smaller and faster. This is also the folder you need to use when deploying the project.
+After it's done, you can see a ```build``` folder inside your working directory, and that folder contains the exactly same information in your working directory but it's smaller and faster. This will be the folder you use when deploying the project.
 
-Webpack or module bundler in general is a very important topic in frontend development, and you will definately benefit a lot from configuring your own Webpack file. However it is a very advanced topics and we will not cover the configuration here, you can review the official doc if you feel interested.
+Webpack or module bundler in general is a very important topic in frontend development, and you will definately benefit a lot from configuring your own Webpack file. However it is a very advanced topic and we will not cover the configuration here, you can review the official doc if you feel interested.
 
 ## Tutorial (Optional)
 
