@@ -28,7 +28,7 @@ npm -v
 ```
 It should return the version you installed
 
-In the educational program we don't need to dive deep into Nodejs, it is just essential when building the React environment. However if you want to learn how to build backend with Node and Express (Nodejs backend framework), you can checkout the tutorial link below.
+In the educational program we don't need to dive deep into Nodejs, it is just essential when building the React environment. However if you want to learn how to build backend server with Node and Express (Nodejs backend framework), you can checkout the tutorial link below.
 
 ## Tutorial (Optional)
 
