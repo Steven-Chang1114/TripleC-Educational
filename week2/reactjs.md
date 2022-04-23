@@ -8,15 +8,35 @@
 ### 3. [Layout](#layout)
 ### 4. [JSX](#jsx)
 ### 5. [Components](#components)
-* [Functional and Class Component](#functional-and-class-component)
-* [Props](#props)
-  * [Parent to Child](#parent-to-child)
-  * [Child to Parent](#child-to-parent)
-* [Event](#event)
-* [Lifecycle](#lifecycle)
-* [Hooks](#hooks)
-  * [State](#state)
-  * [Effect](#effect)
+- [Reactjs](#reactjs)
+  - [Table of Content](#table-of-content)
+    - [1. Intro](#1-intro)
+    - [2. Set up](#2-set-up)
+    - [3. Layout](#3-layout)
+    - [4. JSX](#4-jsx)
+    - [5. Components](#5-components)
+    - [6. Styling](#6-styling)
+    - [7. Webpack](#7-webpack)
+  - [Intro](#intro)
+  - [Set up](#set-up)
+  - [Layout](#layout)
+  - [JSX](#jsx)
+  - [Components](#components)
+    - [Functional and Class Component](#functional-and-class-component)
+    - [Props](#props)
+      - [Parent to Child](#parent-to-child)
+      - [Child to Parent](#child-to-parent)
+    - [Event](#event)
+    - [Lifecycle](#lifecycle)
+    - [Hooks](#hooks)
+      - [State](#state)
+      - [Effect](#effect)
+  - [Styling](#styling)
+    - [Inline Styling](#inline-styling)
+    - [JavaScript Object](#javascript-object)
+    - [CSS Stylesheet](#css-stylesheet)
+  - [Webpack](#webpack)
+  - [Tutorial (Optional)](#tutorial-optional)
 ### 6. [Styling](#styling)
 ### 7. [Webpack](#webpack)
 
@@ -447,8 +467,161 @@ To change the value, use ```setTxt("Hi")```, now the ```txt``` holds the value `
 Both ```txt``` and ```setTxt``` is not built in value in React, the developer needs name them.
 
 #### Effect
+In short, ```effect``` hooks is to mimic the lifecycle methods in Class Component, the syntax is as follows, first you need to import ```useEffect``` hook
+```
+import { useEffect } from 'react';
+```
+Then inside the component, you should do
+```
+useEffect(() => {
+    console.log("Hello")
+});
+```
+This means the console will print ```Hello``` everytime this component rerender.
 
+```useEffect``` method has two argument: callback function and a "trigger" variable. Callback function is called everytime when the corresponding life cycle method gets triggered, and the "trigger" variable indicates which lifecycle methods ```useEffect``` hook is mapping to. There are few example:
+```
+useEffect(() => {
+    console.log("Hello")
+});
+```
+The above code will get triggered on each render of the component (Same as ```componentDidUpdate```)
+```
+useEffect(() => {
+    console.log("Hello")
+}, []);
+```
+The above code will get triggered on initial render of the component (Same as ```componentDidMount```)
+```
+useEffect(() => {
+    console.log("Hello")
+}, [txt]);
+```
+The above code will get triggered everytime when ```txt``` variable's value gets changes (Same as ```shouldComponentUpdate```)
+```
+useEffect(() => {
+    console.log("Hello")
+    return () => {
+        // Clean up here
+    }
+}, []);
+```
+The above code is a ```componentDidMount``` effect hook, but the focus here is the ```return``` function inside ```useEffect```, this is triggered before the component unmounting, so this is the way to implement ```componentWillUnmount```
+
+## Styling
+
+There are several way to write CSS in React:
+
+### Inline Styling
+```
+import { useState, useEffect } from "react"
+import Button from "./Button.js"
+
+const App = () => {
+  const [txt, setTxt] = useState("Hello")
+
+  const updateText = (value) => {
+    setTxt(value)
+  }
+  
+  return (
+    <div style={{backgroundColor: "green"}} className="App">
+      <h1 style={{backgroundColor: "lightblue"}}>{txt}</h1>
+      <Button updateText={updateText}/>
+    </div>
+  );
+}
+
+export default App;
+
+```
+Use ```style``` as the attribute and change the CSS properties name to be camelCased because it's a javaScript object. In JSX, JavaScript expressions are written inside curly braces, and since JavaScript objects also use curly braces, the styling in the example above is written inside two sets of curly braces ```{{}}```
+
+### JavaScript Object
+Equivalently you can do
+```
+import { useState, useEffect } from "react"
+import Button from "./Button.js"
+
+const App = () => {
+  const [txt, setTxt] = useState("Hello")
+
+  const updateText = (value) => {
+    setTxt(value)
+  }
+
+  const styles = {
+    header: {
+      backgroundColor: "lightblue"
+    },
+    container: {
+      backgroundColor: 'green'
+    }
+  }
+
+  return (
+    <div style={styles.container} className="App">
+      <h1 style={styles.header}>{txt}</h1>
+      <Button updateText={updateText}/>
+    </div>
+  );
+}
+
+export default App;
+```
+Here you define a ```styles``` object with all the CSS properties in this page and you map the corresponing CSS styles to the HTML elements as a JS object
+
+### CSS Stylesheet
+Create a new file called ```App.css```. By the coding convention, the CSS and JS file shares the same component name: ```App.css``` with ```App.js```, ```Button.css``` with ```Button.js``` etc.
+```
+// App.css
+.App {
+    backgroundColor: 'green';
+}
+h1 {
+    backgroundColor: "lightblue";
+}
+```
+And we just need to import the stylesheet into our ```App.js``` file
+```
+// App.js
+import { useState, useEffect } from "react"
+import Button from "./Button.js"
+import './App.css';
+
+const App = () => {
+  const [txt, setTxt] = useState("Hello")
+
+  const updateText = (value) => {
+    setTxt(value)
+  }
+
+  return (
+    <div className="App">
+      <h1>{txt}</h1>
+      <Button updateText={updateText}/>
+    </div>
+  );
+}
+
+export default App;
+```
+Now we done! Here's the result webpage
+![](css.png)
+
+## Webpack
+[Officla Doc](https://webpack.js.org/)
+
+In a modern web application, the working directories will usually get massive with a lot of nested Components and codes from third party libraries. In addtion to that, some of our ES6 syntax won't work on older browser, so it becomes a problem that the web application might work on one's machine but break on another. Even if you make it works, the final size of the JS files will be HUGE. Therefore it's time for Webpack comes into play.
+
+Webpack is a module bundler that not only combines and minifies the JS and CSS files, it also handles the assets such as images. In short words, Webpack is used to solve all those previously mentioned problems. The better part is React handles Webpack for the developers, so it eventually becomes a simple command
+```
+npm run build
+```
+After it's done, you can see a ```build``` folder inside your working directory, and that folder contains the exactly same information in your working directory but it's smaller and faster. This is also the folder you need to use when deploying the project.
+
+Webpack or module bundler in general is a very important topic in frontend development, and you will definately benefit a lot from configuring your own Webpack file. However it is a very advanced topics and we will not cover the configuration here, you can review the official doc if you feel interested.
 
 ## Tutorial (Optional)
 
-[Tutorial](https://www.youtube.com/watch?v=TlB_eWDSMt4)
+[Tutorial (React)](https://www.youtube.com/watch?v=Dorf8i6lCuk)
