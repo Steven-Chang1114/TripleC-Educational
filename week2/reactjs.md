@@ -411,6 +411,40 @@ In the previous sections, you have seen the use of ```Hooks``` many times alread
 ```Hooks``` is a very important concept in modern React, for full information, you can check out [this doc](https://reactjs.org/docs/hooks-intro.html). In this educational program, we will go over the two most important hooks: ```useState()``` and ```useEffect()```
 
 #### State
+```State``` is a form of dynamic storage that exists in each components. To use the ```state``` you first need to import from ```react``` package
+```
+import { useState } from "react"
+```
+
+The syntax is as follows:
+```
+import { useState } from "react"
+import Button from "./Button.js"
+
+const App = () => {
+  const [txt, setTxt] = useState("Hello")
+
+  const updateText = (value) => {
+    setTxt(value)
+  }
+
+  return (
+    <div className="App">
+      <h1>{txt}</h1>
+      <Button updateText={updateText}/>
+    </div>
+  );
+}
+
+export default App;
+```
+```useState``` is used inside the component (Inside ```const App = () => {}```), it will returns an array of two elements, state, and the function to update this state.
+
+Take the example code above as an example: ```txt``` is the state value and ```setTxT``` is the function to change ```txt```. The default value (```Hello``` in this case) is being passed as the parameter into ```useState```.
+
+To change the value, use ```setTxt("Hi")```, now the ```txt``` holds the value ```Hi```. 
+
+Both ```txt``` and ```setTxt``` is not built in value in React, the developer needs name them.
 
 #### Effect
 
