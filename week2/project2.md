@@ -1,2 +1,2 @@
 # Project 2
-Similiar as
+Similiar as project 1, but this time you need to write it in React
