@@ -16,7 +16,7 @@ NPM (Node package manager) is the package manager for Nodejs environment. It cen
 
 ## Set up
 
-To install Nodejs, go to [this link](https://code.visualstudio.com/), this will install both Nodejs and NPM.
+To install Nodejs, go to [this link](https://nodejs.org/en/), this will install both Nodejs and NPM.
 
 After finish installing you can check if you have successfully install using following command:
 ```
