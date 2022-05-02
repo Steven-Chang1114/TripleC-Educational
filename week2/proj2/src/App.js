@@ -18,7 +18,7 @@ function App() {
 
 
   const onAppBtnClick = (val) => {
-    if (val.name && val.age) {
+    if (val.name && val.age && val.status) {
       console.log(val)
     } else {
       console.log("ERROR")

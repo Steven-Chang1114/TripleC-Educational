@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 
 const Form = (props) => {
-    const [userInfo, setUserInfo] = useState({})
+    const [userInfo, setUserInfo] = useState({name: null, age: null, status: null})
 
     useEffect(()=> {
       console.log("Called")
@@ -34,32 +34,30 @@ const Form = (props) => {
 
     return (
       <div style={styles.form}>
-              <div >
-                    <label >Name:</label>
-                    <input onChange={e=>{setUserInfo({...userInfo, name: e.target.value})}} />
-                </div>
-                <label>Age:</label>
-                <input onChange={e=>{
-                      setUserInfo({...userInfo, age: e.target.value})
-                      }}/>
-                <p>Your status:</p>
-                <div>
-                    <input
-                           checked onChange={e=>{
-                      setUserInfo({...userInfo, status: "freshman"})
-                      console.log(userInfo)
-                      }}/>
-                    <label>Freshman</label>
-                  </div>
-                  
-                  <div>
-                    <input onChange={e=>{
-                      setUserInfo({...userInfo, status: "sophomore"})
-                      console.log(userInfo)
-                      }}/>
-                    <label>Sophomore</label>
-                  </div>
-                  <input style={styles.btn} value="Click" onClick={() => props.onBtnClick(userInfo)} />
+        <div >
+          <label >Name:</label>
+            <input onChange={e=>{setUserInfo({...userInfo, name: e.target.value})}} />
+        </div>
+        <label>Age:</label>
+        <input 
+          onChange={e=>{
+          setUserInfo({...userInfo, age: e.target.value})
+          }}/>
+        <p>Your status:</p>
+        <div               
+          onChange={e=>{
+              setUserInfo({...userInfo, status: e.target.value})
+              }}>
+          <div>
+            <input type="radio" value="Freshman" name="status"/>
+            <label>Freshman</label>
+          </div>          
+          <div>
+            <input type="radio" value="Sophomore" name="status"/>
+            <label>Sophomore</label>
+          </div>
+        </div>
+        <input style={styles.btn} value="Click" onClick={() => props.onBtnClick(userInfo)} />
       </div>
     );
   }
