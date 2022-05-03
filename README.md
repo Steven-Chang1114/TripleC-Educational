@@ -18,3 +18,9 @@
 ### 1. [Nodejs & NPM](week2/nodejsnpm.md)
 ### 2. [Reactjs](week2/reactjs.md)
 ### 3. [Project 2](week2/project2.md)
+
+## Week 2:
+### Python and Flask
+### 1. [Python](week3/python.md)
+### 2. [Flask](week3/flask.md)
+### 3. [Project 3](week3/project3.md)
