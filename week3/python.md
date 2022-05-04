@@ -213,6 +213,26 @@ To make a copy of list you cannot do ```b = a``` because every changes on ```a``
 
 
 ### Tuples
+A tuple is a collection which is ordered and ***unchangeable***.
+The syntax is as below:
+```
+a = (1,2,3,4,5,6,7)
+print(a)            # (1,2,3,4,5,6,7)
+print(a[1])         # 2
+print(a[-1])        # 7
+print(a[2:5])       # (3,4,5)
+print(a[:4])        # (1, 2, 3, 4)
+print(a[2:])        # (3, 4, 5, 6, 7)
+print(a[-4:-1])     # (4, 5, 6)
+print(2 in a)       # True
+```
+Since tuple is unchangeable, so if you really want to edit the tuple you should convert it to list and do the manipulation and then change it back to tuple
+```
+b = list(a)
+b[1] = 3
+a = tuple(b)
+print(a)            # (1, 3, 3, 4, 5, 6, 7)
+```
 
 ### Dictionary
 
