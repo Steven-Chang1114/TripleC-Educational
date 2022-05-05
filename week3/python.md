@@ -236,16 +236,200 @@ print(a)            # (1, 3, 3, 4, 5, 6, 7)
 ```
 
 ### Set
-A set is a collection which is unordered, unchangeable (but you can still add and remove item), and unindexed, and you cannot store dupli
+A set is a collection which is unordered, unchangeable (but you can still add and remove item), and unindexed, and you cannot store duplicate items in a set (will not raise error, just simply won't work)
+
+```
+s = {1,2,3}
+print(s)                        # {1,2,3}
+print(len(s))                   # 3
+
+s = {1,1,2,3}
+print(s)                        # {1,2,3}
+
+s = {1,1,'2',3}
+print(s)                        # {1, 3, '2'}
+
+s = {1,1,'2',3, []}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+
+s = {1,1,2,3}
+print(1 in s)                   # True
+
+# You cannot access individual item in the set since it's unindexed
+
+s.add(5)
+print(s)                        # {1, 3, '2', 5}
+
+a = {1,2,3}
+b = {4,5,6}
+a.update(b)
+print(a)                        # {1, 2, 3, 4, 5, 6}
+
+a = {1,2,3}
+b = [4,5,6]
+a.update(b)
+print(a)                        # {1, 2, 3, 4, 5, 6}
+
+a.remove(3)
+print(a)                        # {1, 2, 4, 5, 6}
+
+a.pop()                         # 1 (You don't know which item got removedß)
+print(a)                        # {2, 4, 5, 6}
+
+for x in a:
+  print(x)
+
+# 2
+# 4
+# 5
+# 6
+```
 
 ### Dictionary
 
+Dictionary is like Object in JS, it's simply key value pair
+
+```
+dic = {
+    "name": "Steven",
+    "age": 21
+}
+
+print(dic)                  # {'name': 'Steven', 'age': 21}
+print(len(dic))             # 2
+print(dic['age'])           # 21
+print(dic.get('age'))       # 21
+print(dic.keys())           # dict_keys(['name', 'age'])
+print(dic.values())         # dict_values(['Steven', 21])
+print(dic.items())          # dict_items([('name', 'Steven'), ('age', 21)])
+print(21 in dic)            # False
+print('age' in dic)         # True
+
+dic['age'] = 22
+print(dic)                  # {'name': 'Steven', 'age': 22}
+
+dic.update({"age": 23})
+print(dic)                  # {'name': 'Steven', 'age': 23}
+
+dic["major"] = 'CE'
+print(dic)                  #{'name': 'Steven', 'age': 22, 'major': 'CE'}
+
+dic.pop("major")
+print(dic)                  #{'name': 'Steven', 'age': 22}
+
+dic.update({"major": 'CE'})
+print(dic)                  #{'name': 'Steven', 'age': 22, 'major': 'CE'}
+```
 
 ### Function
+```
+def helloWorld():
+    print("Hello World")
+
+def add1(x):
+    return 1 + x
+
+def adder(x, y=2):
+    return x + y
+
+helloWorld()            # "Hello World"
+add1(2)                 # 3
+adder(2, 3)             # 5
+adder(1)                # 3
+```
 
 ### Loop and if statement
+```
+# If statement
+
+a = 1
+b = 2
+
+if a > b:
+    print("a is greater than b")
+elif a < b:
+    print("a is smaller than b")
+else:
+    print("a == b")
+
+# While loop
+i = 1
+while i < 6:
+  print(i)
+  if i == 3:
+    break
+  i += 1
+
+# For loop
+arr = [1,2,3]
+for x in arr:
+  print(x)
+
+# Equivalently
+
+for i in range(len(arr)):
+    print(arr[i])
+
+# For loop for dictionaries
+dic = {
+    "name": "Steven",
+    "age": 21,
+    "major": "CE"
+}
+
+for x in dic:
+  print(x)
+# name
+# age
+# major
+
+for x in dic:
+  print(dic[x])
+# Steven
+# 22
+# CE
+
+for x in dic.values():
+  print(x)
+# Steven
+# 22
+# CE
+
+for x in dic.keys():
+  print(x)
+# name
+# age
+# major
+
+for x, y in dic.items():
+  print(x, y)
+# name Steven
+# age 22
+# major CE
+```
+
 
 ### Lambda function
+A lambda function is a small anonymous function, it can take any number of arguments, but can only have one expression.
+
+```
+x = lambda a : a + 10
+print(x(5))                     # 15
+
+lst = [('candy','30','100'), ('apple','10','200'), ('baby','20','300')]
+lst.sort(key=lambda x:x[0])
+print(lst)                      # [('apple', '10', '200'), ('baby', '20', '300'), ('candy', '30', '100')]
+
+lst = [('candy','30','100'), ('apple','10','200'), ('baby','20','300')]
+lst.sort(key=lambda x:x[1])
+print(lst)                      # [('apple', '10', '200'), ('baby', '20', '300'), ('candy', '30', '100')]
+
+lst = [('candy','30','100'), ('apple','10','200'), ('baby','20','300')]
+lst.sort(key=lambda x:x[2])
+print(lst)                      # [('candy', '30', '100'), ('apple', '10', '200'), ('baby', '20', '300')]
+```
 
 ## Tutorial (Optional)
 
