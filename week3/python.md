@@ -9,8 +9,9 @@
     * [Variable declaration](#variable-declaration)
     * [String](#string)
     * [list](#list)
-    * [Dictionary](#dictionary)
     * [Tuples](#tuples)
+    * [Set](#set)
+    * [Dictionary](#dictionary)
     * [Function](#function)
     * [Loop and if statement](#loop-and-if-statement)
     * [Lambda function](#lambda-function)
@@ -233,6 +234,9 @@ b[1] = 3
 a = tuple(b)
 print(a)            # (1, 3, 3, 4, 5, 6, 7)
 ```
+
+### Set
+A set is a collection which is unordered, unchangeable (but you can still add and remove item), and unindexed, and you cannot store dupli
 
 ### Dictionary
 
