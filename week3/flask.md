@@ -24,7 +24,9 @@ To install Flask, simply do
 pip3 install flask
 ```
 
-OR there's a more advanced way of setting it up, first install virtualenv
+OR 
+
+there's a more advanced way of setting it up, first install virtualenv
 ```
 pip3 install virtualenv
 ```
@@ -42,6 +44,8 @@ pip3 install flask
 ```
 
 For the debuging and testing purposes, it's highly recommended to download [Postman](https://www.postman.com/) in [here](https://www.postman.com/downloads/). It's a tool that you can directly fire request to your api without actually building a frontend interface.
+
+Before we actually dive in flask, we need to first introduce some concept about software development.
 
 
 ## Client Server architecture
@@ -107,6 +111,7 @@ Here are some status code that is commonly seen
 | 401 | Unauthorized | The client request has not been completed because it lacks valid authentication credentials for the requested resource |
 | 403 | Forbidden | The server understands the request but refuses to authorize it. |
 | 404 | Not Found | The server cannot find the requested resource. |
+| 405 | Method Not Allowed | The server knows the request method, but the target resource doesn't support this method. |
 | 409 | Conflict | A request conflict with the current state of the target resource. |
 | 410 | Gone | Access to the target resource is no longer available at the origin server and that this condition is likely to be permanent.|
 | 500 | Internal Server Error | The server encountered an unexpected condition that prevented it from fulfilling the request.|
@@ -117,3 +122,272 @@ Here are some status code that is commonly seen
 Typically, ```1..``` means informational response, ```2...``` means success, ```3..``` means redirection, ```4..``` means client errors, ```5..``` means server errors.
 
 ### Syntax
+To create a very simple flask application simply do
+```python
+from flask import Flask
+
+# Init the flask app
+app = Flask(__name__) 
+
+# hello_world() is called when we access the '/' which is the root url
+@app.route('/')
+def hello_world():
+    return 'Hello world!'
+
+# This file got executed when ran directly
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+To activate it, do
+```
+python3 app.py
+```
+
+You should see something like this
+```
+ * Serving Flask app 'app' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 383-983-382
+```
+One thing to notice is that ```Running on http://127.0.0.1:5000 (Press CTRL+C to quit)```. When we go to ```http://127.0.0.1:5000```, you should see the following.
+
+![](hello.png)
+
+This is the flask hello world example, but it's not an api yet. Now we need to enable the HTTP method in flask.
+
+The implementation is easy, in ```@app.route``` tag, there is another argument called ```methods``` which takes an array of HTTP methods.
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    return 'Hello world!'
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+This means you can only access ```/``` (```http://127.0.0.1:5000/```) with GET or POST request otherwise you will get a ```405``` error code.
+
+On the other hand, if you want to send argument to the backend server, you can do
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    return 'Hello World!'
+
+@app.route('/items/<int:id>', methods=['GET'])
+def get_item(id):
+    arr = [1,2,3,4,5,6]
+    # The return type must be a string, dict, tuple
+    return str(arr[id])
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+Therefore it will return ```2``` when you fire a GET request to ```http://127.0.0.1:5000/items/1```
+
+You can also distinguish the type of methods using ```request.method```
+```python
+# Notice I import request from flask
+from flask import Flask, request 
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    if request.method == 'POST':
+        return "It's a POST request"
+    else:
+        return "It's a GET request"
+
+@app.route('/items/<int:id>', methods=['GET'])
+def get_item(id):
+    arr = [1,2,3,4,5,6]
+    return str(arr[id])
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+However that's not the only way to get ```params``` from ```GET``` request, we can also do the following
+```python
+from flask import Flask, request 
+app = Flask(__name__)
+
+db_users = {
+    "John" : "Miami",
+    "David" : "Miami",
+    "Jane" : "London",
+    "Gabriella" : "Paris",
+    "Tanaka" : "Tokyo"
+}
+
+items = [1,2,3,4,5,6]
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    if request.method == 'POST':
+        return "It's a POST request"
+    else:
+        return "It's a GET request"
+
+@app.route('/items/<int:id>', methods=['GET'])
+def get_item(id):
+    return str(items[id])
+
+@app.route('/search', methods=['GET'])
+def search():
+    args = request.args
+    name = args.get('name')
+    location = args.get('location')
+
+    # result = db_users
+    if None not in (name, location):
+        result = {key: value for key, value in db_users.items() if key == name and value == location}
+    elif name is not None:
+        result = {key: value for key, value in db_users.items() if key == name}
+    elif location is not None:
+        result = {key: value for key, value in db_users.items() if value == location}
+
+    return result
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+To access ```\search```, do ```http://127.0.0.1:5000/search?name=NAME&location=LOCATION```. For example ```http://127.0.0.1:5000/search?name=John&location=Miami```
+
+Usually when sending the response back to the client, we want to convert it in ```JSON``` format.
+```python
+# Note I import jsonify
+from flask import Flask, request, jsonify 
+app = Flask(__name__)
+
+db_users = {
+    "John" : "Miami",
+    "David" : "Miami",
+    "Jane" : "London",
+    "Gabriella" : "Paris",
+    "Tanaka" : "Tokyo"
+}
+
+items = [1,2,3,4,5,6]
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    if request.method == 'POST':
+        return jsonify({'message': "It's a POST request"})
+    else:
+        return jsonify({'message': "It's a GET request"})
+
+@app.route('/items/<int:id>', methods=['GET'])
+def get_item(id):
+    item = str(items[id])
+    return jsonify({'item': item})
+
+@app.route('/search', methods=['GET'])
+def search():
+    args = request.args
+    name = args.get('name')
+    location = args.get('location')
+
+    # result = db_users
+    if None not in (name, location):
+        result = jsonify({key: value for key, value in db_users.items() if key == name and value == location})
+    elif name is not None:
+        result = jsonify({key: value for key, value in db_users.items() if key == name})
+    elif location is not None:
+        result = jsonify({key: value for key, value in db_users.items() if value == location})
+
+    return result
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+Now the response will be like ```{ "item": 2 }``` for ```http://127.0.0.1:5000/items/1```
+
+Another way to send data from client to server is to pass the data into payload. To retrive that from the server, we can do
+```python
+from flask import Flask, request, jsonify, abort
+
+app = Flask(__name__)
+
+db_users = {
+    "John" : "Miami",
+    "David" : "Miami",
+    "Jane" : "London",
+    "Gabriella" : "Paris",
+    "Tanaka" : "Tokyo"
+}
+
+users = {
+    "name": ["John"]
+}
+
+items = [1,2,3,4,5,6]
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+    print(request)
+    if request.method == 'POST':
+        return jsonify({'message': "It's a POST request!"})
+    else:
+        return jsonify({'message': "It's a GET request"})
+
+@app.route('/items/<int:id>', methods=['GET'])
+def get_item(id):
+    item = str(items[id])
+    return jsonify({'item': item})
+
+@app.route('/search', methods=['GET'])
+def search():
+    args = request.args
+    name = args.get('name')
+    location = args.get('location')
+
+    # result = db_users
+    if None not in (name, location):
+        result = jsonify({key: value for key, value in db_users.items() if key == name and value == location})
+    elif name is not None:
+        result = jsonify({key: value for key, value in db_users.items() if key == name})
+    elif location is not None:
+        result = jsonify({key: value for key, value in db_users.items() if value == location})
+
+    return result
+
+@app.route('/searchppl', methods=['POST'])
+def searchppl(): 
+    data = request.json
+
+    # Error handle
+    if len(data['name']) < 1:
+        status_code = 400
+        success = False
+        response = {
+            'success': success,
+            'error': {
+                'message': "Name too short"
+            }
+        }
+        return jsonify(response), status_code
+
+    users["name"].append(data['name'])
+    return users
+
+if __name__ == "__main__":
+    app.run(debug=True)
+```
+
+Notice I used ```abort``` to throw the appropriate error message
