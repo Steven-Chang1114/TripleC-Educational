@@ -390,4 +390,11 @@ if __name__ == "__main__":
     app.run(debug=True)
 ```
 
-Notice I used ```abort``` to throw the appropriate error message
+Notice I used did error handle with the customize error message and appreciate status code
+
+
+Finally before deploy the app, run
+```
+pip3 freeze > requirement.txt
+```
+So it will put all versions inside the ```requirement.txt``` file
