@@ -268,6 +268,9 @@ if __name__ == "__main__":
 
 To access ```\search```, do ```http://127.0.0.1:5000/search?name=NAME&location=LOCATION```. For example ```http://127.0.0.1:5000/search?name=John&location=Miami```
 
+On Postman, the request looks like the following
+![](search.png)
+
 Usually when sending the response back to the client, we want to convert it in ```JSON``` format.
 ```python
 # Note I import jsonify
@@ -367,8 +370,8 @@ def search():
 
     return result
 
-@app.route('/searchppl', methods=['POST'])
-def searchppl(): 
+@app.route('/addppl', methods=['POST'])
+def addppl(): 
     data = request.json
 
     # Error handle
@@ -392,8 +395,13 @@ if __name__ == "__main__":
 
 Notice I used did error handle with the customize error message and appreciate status code
 
+Therefore on Postman if you want to make the request, you can do
+![](addppl.png)
 
-Finally before deploy the app, run
+If there's an error, the response will look like this
+![](error.png)
+
+Finally before deploying the app, run
 ```
 pip3 freeze > requirement.txt
 ```

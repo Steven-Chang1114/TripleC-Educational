@@ -1,4 +1,3 @@
-# Note I import jsonify
 from flask import Flask, request, jsonify, abort
 
 app = Flask(__name__)
@@ -46,8 +45,8 @@ def search():
 
     return result
 
-@app.route('/searchppl', methods=['POST'])
-def searchppl(): 
+@app.route('/addppl', methods=['POST'])
+def addppl(): 
     data = request.json
 
     # Error handle
