@@ -3,6 +3,8 @@
 ### Weekly Contents:
 1. [Introduction to Git, VS code, HTML & CSS & JS](#week-1)
 2. [Nodejs, NPM and Reactjs](#week-2)
+3. [Flask and Python](#week-3)
+4. [SQL and NoSQL database](#week-4)
 
 ## Week 1:
 ### Introduction to Git, VS code, HTML, CSS and JavaScript
@@ -19,8 +21,12 @@
 ### 2. [Reactjs](week2/reactjs.md)
 ### 3. [Project 2](week2/project2.md)
 
-## Week 2:
+## Week 3:
 ### Python and Flask
 ### 1. [Python](week3/python.md)
 ### 2. [Flask](week3/flask.md)
-### 3. [Project 3](week3/project3.md)
+
+## Week 4:
+### SQL and NoSQL database
+### 1. [SQL](week4/sql.md)
+### 2. [NoSQL](week34/nosql.md)

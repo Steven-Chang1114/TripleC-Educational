@@ -405,4 +405,4 @@ Finally before deploying the app, run
 ```
 pip3 freeze > requirement.txt
 ```
-So it will put all versions inside the ```requirement.txt``` file
+So it will put all versions inside the ```requirement.txt``` file. Next time if you clone other developer's python repo with ```requirement.txt```, you can install the required dependencies with ```pip install -r requirements.txt```
