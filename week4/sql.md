@@ -15,6 +15,7 @@
 * [UPDATE](#update)
 * [INDEX](#index)
 * [JOIN](#join)
+* [DROP](#drop)
 
 ## Intro
 
@@ -235,6 +236,79 @@ To create an index, simply do
 CREATE INDEX username_index ON Users(username)
 ```
 This will not have any immediate effect on our current database for now, but it will become much faster when you are querying the data based on ```username```.
+
+
+### JOIN
+
+Now after we know the basics of SQL, we can start to create relation between different table, first we should create a new table called ```Car```
+```sql
+--@block
+CREATE TABLE Cars(
+    id INT PRIMARY KEY AUTO_INCREMENT, 
+    car VARCHAR(255) NOT NULL,
+    owner_id INT NOT NULL,
+    FOREIGN KEY (owner_id) REFERENCES Users(id)
+);
+
+--@block
+INSERT INTO Cars(car, owner_id)
+VALUES
+    ("Toyota", 1),
+    ("Tesla", 1),
+    ("Tesla", 2),
+    ("Ford", 3);
+```
+
+Notice in the ```CREATE``` statement, there are two ids now. One is the ```PRIMARY KEY``` id, which is the id for the data entry in the ```Cars``` table, another one is ```FOREIGN KEY``` id which is the id for the external table, in this case ```Users``` table. Therefore this table not only contains the cars' collection, also it specisify each car's owner.
+
+If we now do the normal ```SELECT``` statement, it will looks like this
+
+![](nojoin.png)
+
+It is intended but we does not know the owner's exact information. That's why we need to use ```JOIN```
+
+```JOIN``` as the word states, joins two table to each other and show each respective desired information. There are 6 types of ```JOIN```
+
+![](https://cdn.educba.com/academy/wp-content/uploads/2019/11/joins-in-mysql-1.png)
+
+We will go over some of them today
+
+```sql
+--@block
+SELECT * FROM Users
+INNER JOIN Cars
+ON Cars.owner_id = Users.id;
+```
+
+![](a.png)
+
+More complicated you can do
+```sql
+--@block
+SELECT 
+    Users.id AS user_id,
+    Cars.id AS car_id,
+    username,
+    age
+FROM Users
+INNER JOIN Cars
+ON Cars.owner_id = Users.id
+WHERE
+    age < 21;
+```
+This means to map ```Users.id``` header to ```user_id``` and ```Cars.id``` header to ```car_id``` for simplicity, and then we query the car owner who is not an adult yet.
+
+### Drop
+
+Lastly, to delete the table or database, you can do
+```sql
+DROP TABLE Cars;
+```
+
+```sql
+DROP DATABASE triplec;
+```
+But ***use it carefully***
 
 ## Tutorial (Optional)
 
