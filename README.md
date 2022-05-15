@@ -4,7 +4,8 @@
 1. [Introduction to Git, VS code, HTML & CSS & JS](#week-1)
 2. [Nodejs, NPM and Reactjs](#week-2)
 3. [Flask and Python](#week-3)
-4. [SQL and NoSQL database](#week-4)
+4. [SQL database](#week-4)
+4. [NoSQL database](#week-5)
 
 ## Week 1:
 ### Introduction to Git, VS code, HTML, CSS and JavaScript
@@ -27,6 +28,9 @@
 ### 2. [Flask](week3/flask.md)
 
 ## Week 4:
-### SQL and NoSQL database
+### SQL database
 ### 1. [SQL](week4/sql.md)
-### 2. [NoSQL](week34/nosql.md)
+
+## Week 5:
+### NoSQL database
+### 1. [NoSQL](week5/nosql.md)
