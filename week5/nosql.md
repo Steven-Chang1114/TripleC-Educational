@@ -11,6 +11,11 @@
 * [Document](#document)
 * [Field](#field)
 ### 5. [Syntax](#syntax)
+* [Database](#database)
+* [Collection](#collection-1)
+* [Find](#find)
+* [Update](#update)
+* [Delete](#delete)
 
 
 ## Intro
@@ -93,6 +98,8 @@ It will show
 ```
 myFirstDatabase
 ```
+This is your database name
+
 To see all available databases, type
 ```
 show dbs
@@ -102,4 +109,194 @@ This returns
 admin  368.00 KiB
 local   11.58 GiB
 ```
-Notice that we cannot see ```myFirstDatabase``` because this database is still empty now
+Notice that we cannot see ```myFirstDatabase``` because this database is still empty now.
+
+### Database
+To create or switch database, type
+```
+use <DATABASENAME>
+```
+For example
+```
+Atlas atlas-13cs5v-shard-0 [primary] myFirstDatabase> use triplec
+```
+will give you
+```
+switched to db triplec
+Atlas atlas-13cs5v-shard-0 [primary] triplec> 
+```
+The prompt shows that you are now in ```triplec``` database
+
+### Collection
+TO create a collection inside the database, you can do
+```js
+db.createCollection('users')
+```
+This will create a empty ```users``` collection. Or we can directly creat the collection by inserting the element
+```js
+db.users.insertOne({name: "Steven", age: 21})
+```
+It should looks like this
+```js
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.insertOne({name: "Steven", age: 21})
+{
+  acknowledged: true,
+  insertedId: ObjectId("6287ec7600980db0d844ed5d")
+}
+```
+Whereas ```db``` is yout current database, ```users``` means ```users``` collection. You don't have to create a ```users``` collection before inserting the data, mongoDB will create one for you if you don't have it previously.
+
+Similarily, you can insert multiple elements at once using
+```js
+db.users.insertMany([{name: "Justin", age:21}, {name: "Bob", age:19}, {name: "Alice", age:22}])
+```
+You should see
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.insertMany([{name: "Justin", age:21}, {name: "Bob", age:19}, {name: "Alice", age:22}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6287ed7100980db0d844ed5e"),
+    '1': ObjectId("6287ed7100980db0d844ed5f"),
+    '2': ObjectId("6287ed7100980db0d844ed60")
+  }
+}
+```
+
+Now if you type ```show dbs``` again, you will see
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> show dbs
+triplec   72.00 KiB
+admin    368.00 KiB
+local     11.58 GiB
+```
+
+### Find
+
+To get the data from the collection, you can use
+```js
+db.users.find()
+```
+This will give you all the datas in the users collection by default
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.find()
+[
+  {
+    _id: ObjectId("6287ec7600980db0d844ed5d"),
+    name: 'Steven',
+    age: 21
+  },
+  {
+    _id: ObjectId("6287ed7100980db0d844ed5e"),
+    name: 'Justin',
+    age: 21
+  },
+  { _id: ObjectId("6287ed7100980db0d844ed5f"), name: 'Bob', age: 19 },
+  { _id: ObjectId("6287ed7100980db0d844ed60"), name: 'Alice', age: 22 }
+]
+```
+To specifically find a data, you can do
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.find({age: 19})
+[ { _id: ObjectId("6287ed7100980db0d844ed5f"), name: 'Bob', age: 19 } ]
+```
+This will return data that has age = 19. You can also do
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.find({age : {$gte: 21}})
+[
+  {
+    _id: ObjectId("6287ec7600980db0d844ed5d"),
+    name: 'Steven',
+    age: 21
+  },
+  {
+    _id: ObjectId("6287ed7100980db0d844ed5e"),
+    name: 'Justin',
+    age: 21
+  },
+  { _id: ObjectId("6287ed7100980db0d844ed60"), name: 'Alice', age: 22 }
+]
+```
+This gives all the data with users that has age greater than or equal to 21.
+
+You can also sort the data by typing
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.find().sort({age:-1})
+[
+  { _id: ObjectId("6287ed7100980db0d844ed60"), name: 'Alice', age: 22 },
+  {
+    _id: ObjectId("6287ec7600980db0d844ed5d"),
+    name: 'Steven',
+    age: 21
+  },
+  {
+    _id: ObjectId("6287ed7100980db0d844ed5e"),
+    name: 'Justin',
+    age: 21
+  },
+  { _id: ObjectId("6287ed7100980db0d844ed5f"), name: 'Bob', age: 19 }
+]
+```
+This command retrives all the data and sort in descending order (1 for ascending order)
+
+### Update
+
+To update a data, we usually use the ```ObjectId```. For example
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.updateOne({_id:ObjectId("6287ec7600980db0d844ed5d")}, {$set: {age:40}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+```
+Remember the first argument is the filter, and the second argument is the field you want to update, ```$set``` is used to only update the specific field and keep the rest。 Similarily, you can also do ```updateMany() ``` with the same syntax, but with a more general filter.
+
+In the end, when you do ```db.users.find()``` again, you should see
+```
+Atlas atlas-13cs5v-shard-0 [primary] triplec> db.users.find()
+[
+  {
+    _id: ObjectId("6287ec7600980db0d844ed5d"),
+    name: 'Steven',
+    age: 40
+  },
+  {
+    _id: ObjectId("6287ed7100980db0d844ed5e"),
+    name: 'Justin',
+    age: 21
+  },
+  { _id: ObjectId("6287ed7100980db0d844ed5f"), name: 'Bob', age: 19 },
+  { _id: ObjectId("6287ed7100980db0d844ed60"), name: 'Alice', age: 22 }
+]
+```
+
+
+### Delete
+
+Similarily, you can delete data using ```deleteOne()``` or ```deleteMany()``` method. For example:
+```js
+db.users.deleteOne({_id:ObjectId("6287ec7600980db0d844ed5d")})
+```
+will delete the user with id ```ObjectId("6287ec7600980db0d844ed5d")```
+
+```
+user: {
+    name: Steven,
+    age: 31,
+    car: [1, 2]
+}
+
+car: [
+    {
+        id:1
+        name: tesla
+    },
+    {
+        id:2
+        name: mercedes
+    }
+]
+```
