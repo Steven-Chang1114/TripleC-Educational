@@ -6,6 +6,9 @@ CREATE TABLE Users(
  );
 
 --@block
+DROP TABLE Users, Cars
+
+--@block
 INSERT INTO Users(username, age)
 VALUES("Steven", 21);
 
@@ -51,7 +54,7 @@ SELECT * FROM Cars
 
 --@block
 SELECT * FROM Users
-INNER JOIN Cars
+RIGHT JOIN Cars
 ON Cars.owner_id = Users.id;
 
 --@block
@@ -59,7 +62,8 @@ SELECT
     Users.id AS user_id,
     Cars.id AS car_id,
     username,
-    age
+    age,
+    car
 FROM Users
 INNER JOIN Cars
 ON Cars.owner_id = Users.id
