@@ -340,4 +340,9 @@ When we are really in the development phase, the common tech stack will be Front
 
 There are another popular tech stack specialized in AWS is Frontend + [API Gateway](https://aws.amazon.com/api-gateway/) + [AWS Lambda](https://aws.amazon.com/lambda/) + mongoose + mongodb.
 
+## Tutorial (Optional)
+
+[Tutorial (MongoDB)](https://www.youtube.com/watch?v=ofme2o29ngU)
+[Tutorial (Mongoose)](https://www.youtube.com/watch?v=DZBGEVgL2eE&t=585s)
+
 
