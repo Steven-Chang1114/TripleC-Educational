@@ -12,18 +12,17 @@
 * [Field](#field)
 ### 5. [Syntax](#syntax)
 * [Database](#database)
-* [Collection](#collection-1)
+* [Collection/Insert](#collection-1)
 * [Find](#find)
 * [Update](#update)
 * [Delete](#delete)
+* [Aggregation](#aggregation)
 
 
 ## Intro
 NoSQL databases are commonly used for specific data models and have flexible schemas for building modern applications. It is widely recognized for its ease of development, functionality, and performance at scale. It is optimized specifically for applications that require large data volume, low latency, and flexible data models, which are achieved by relaxing some of the data consistency restrictions of other databases.
 
 Among all the NoSQL databases, mongoDB is the most famous and widely used ones, so in this education program we will cover the usage of mongoDB. MongoDB is a Document Database that stores the data in JSON (key-value) format 
-
-
 
 ## CAP
 In the previous workshop we said the NoSQL database has CAP properties, and now we are going to explain what each of them means:
@@ -300,3 +299,45 @@ car: [
     }
 ]
 ```
+
+## Aggregation
+Similar as JOIN keyword in sql, aggregation operations process multiple documents and return computed results. To perform aggregation, we need to create our own ```pipeline```. Pipeline is basically stages of operations that process the data, and each stage will acts the data available to it (chainnable). 
+
+Aggregation example is
+```js
+db.orders.aggregate( [
+
+   // Stage 1: Filter pizza order documents by date range
+   {
+      $match:
+      {
+         "date": { $gte: new ISODate( "2020-01-30" ), $lt: new ISODate( "2022-01-30" ) }
+      }
+   },
+
+   // Stage 2: Group remaining documents by date and calculate results
+   {
+      $group:
+      {
+         _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+         totalOrderValue: { $sum: { $multiply: [ "$price", "$quantity" ] } },
+         averageOrderQuantity: { $avg: "$quantity" }
+      }
+   },
+
+   // Stage 3: Sort documents by totalOrderValue in descending order
+   {
+      $sort: { totalOrderValue: -1 }
+   }
+
+ ] )
+```
+It calculates the total pizza order value and average order quantity between two dates
+
+## Application
+
+When we are really in the development phase, the common tech stack will be Frontend + nodejs backend + [mongoose](https://mongoosejs.com/) + mongodb. Mongoose is the Object Data Modeling (ODM) library for MongoDB. It serves as a tool to help developers to easily write mmongoDB query including the interaction and relationship between different collections.
+
+There are another popular tech stack specialized in AWS is Frontend + [API Gateway](https://aws.amazon.com/api-gateway/) + [AWS Lambda](https://aws.amazon.com/lambda/) + mongoose + mongodb.
+
+
