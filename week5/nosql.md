@@ -281,25 +281,6 @@ db.users.deleteOne({_id:ObjectId("6287ec7600980db0d844ed5d")})
 ```
 will delete the user with id ```ObjectId("6287ec7600980db0d844ed5d")```
 
-```
-user: {
-    name: Steven,
-    age: 31,
-    car: [1, 2]
-}
-
-car: [
-    {
-        id:1
-        name: tesla
-    },
-    {
-        id:2
-        name: mercedes
-    }
-]
-```
-
 ## Aggregation
 Similar as JOIN keyword in sql, aggregation operations process multiple documents and return computed results. To perform aggregation, we need to create our own ```pipeline```. Pipeline is basically stages of operations that process the data, and each stage will acts the data available to it (chainnable). 
 
@@ -343,6 +324,7 @@ There are another popular tech stack specialized in AWS is Frontend + [API Gatew
 ## Tutorial (Optional)
 
 [Tutorial (MongoDB)](https://www.youtube.com/watch?v=ofme2o29ngU)
+
 [Tutorial (Mongoose)](https://www.youtube.com/watch?v=DZBGEVgL2eE&t=585s)
 
 
